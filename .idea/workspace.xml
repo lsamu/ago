@@ -20,21 +20,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d85aa51-412c-4d35-b15c-f0ae9423b619" name="默认的" comment="">
-      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/rpc.client/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/rpc.server/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/secure/secure.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rest/handler/handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rest/handler/request.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rest/handler/validator.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rest/rest.conf.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/client.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc/conf.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sock/client.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth/alipay.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth/facebook.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth/qq.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth/wechat.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth/weibo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/cache/rediser.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/email/email.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/http/http.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/httpTest/http.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jwt/jwt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/license/license.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/logger/logger.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/mqtt/mqtt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pay/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/queue/queue.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/secret/secret.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/strs/pad.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/strs/pad_example.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/strs/pad_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/strs/padutf8.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/strs/padutf8_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/strs/strs.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/task/timer.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/upload/aliyun.oss.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/upload/local.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/upload/qiniu.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/upload/tencent.cos.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/structcopy.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils/structcopy_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/zlogger/zlogger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/rest/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/rest/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/rest/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/rpc/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/secure/secure.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,39 +90,19 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/examples/rpc.server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/rest" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/examples/rpc.server" />
       <recent name="$PROJECT_DIR$/examples" />
       <recent name="$PROJECT_DIR$/rest" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/rest" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="ago" />
-      <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="ago" />
-      <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
-      <framework value="gotest" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +118,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -133,9 +133,9 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2195" y="286" width="547" height="500" key="EnvironmentVariablesDialog/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1625019915830" />
-    <state x="2411" y="150" key="SettingsEditor" timestamp="1625019918840">
+    <state x="2411" y="150" key="SettingsEditor" timestamp="1625192337581">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2411" y="150" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1625019918840" />
+    <state x="2411" y="150" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1040@1920.0.1920.1080" timestamp="1625192337581" />
   </component>
 </project>
