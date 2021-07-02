@@ -20,40 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d85aa51-412c-4d35-b15c-f0ae9423b619" name="默认的" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/auth/alipay.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/auth/facebook.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/auth/qq.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/auth/wechat.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/auth/weibo.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/cache/rediser.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/email/email.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/http/http.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/httpTest/http.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jwt/jwt.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/license/license.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/logger/logger.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/mqtt/mqtt.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pay/base.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/queue/queue.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/secret/secret.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/strs/pad.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/strs/pad_example.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/strs/pad_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/strs/padutf8.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/strs/padutf8_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/strs/strs.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/task/timer.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/upload/aliyun.oss.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/upload/local.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/upload/qiniu.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/upload/tencent.cos.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils/structcopy.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils/structcopy_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/zlogger/zlogger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/rest/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/rest/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/secure/secure.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
