@@ -1,0 +1,5 @@
+package docker
+
+const (
+    dockerTemplate = ``
+)
