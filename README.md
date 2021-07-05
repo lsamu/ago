@@ -16,7 +16,6 @@ func main() {
     defer server.Stop()
     server.Start()
 }
-
 ```
 
 ## rpc
