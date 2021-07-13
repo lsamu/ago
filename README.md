@@ -1,5 +1,7 @@
 # ago
-go+gin+gorm+grpc+socket
+```
+基于go+gin+gorm+grpc+socket开发框架. 持续更新中...
+```
 
 ## 安装
 ```
