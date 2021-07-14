@@ -3,8 +3,77 @@ package jwt
 import (
     "errors"
     "github.com/dgrijalva/jwt-go"
+    "sync"
+    "sync/atomic"
     "time"
 )
+
+const claimHistoryResetDuration = time.Hour * 24
+
+type (
+    ParseOption func(parser *TokenParser)
+    TokenParser struct {
+        resetTime     time.Duration
+        resetDuration time.Duration
+        history       sync.Map
+    }
+)
+
+// NewTokenParser 新的TokenParser
+func NewTokenParser(opts ...ParseOption) *TokenParser {
+    parser := &TokenParser{
+        resetTime:     time.Since(time.Now()),
+        resetDuration: claimHistoryResetDuration,
+    }
+    for _, opt := range opts {
+        opt(parser)
+    }
+    return parser
+}
+
+//ParseToken 格式化Token
+func (tp *TokenParser) ParseToken(secret, prevSecret string) ( token *jwt.Token, err error) {
+    if len(prevSecret) > 0 {
+
+    }
+    return
+}
+
+//CreateToken 生成Token
+func (tp *TokenParser) CreateToken(secret, prevSecret string) ( token *jwt.Token, err error) {
+    if len(prevSecret) > 0 {
+
+    }
+    return
+}
+
+// loadCount 个数
+func (tp *TokenParser) loadCount(secret string) uint64 {
+    value, ok := tp.history.Load(secret)
+    if ok {
+        return *value.(*uint64)
+    }
+    return 0
+}
+
+// incrementCount 计数
+func (tp *TokenParser) incrementCount(secret string) {
+    now := time.Since(time.Now())
+    if tp.resetTime+tp.resetDuration < now {
+        tp.history.Range(func(key, value interface{}) bool {
+            tp.history.Delete(key)
+            return true
+        })
+    }
+
+    value, ok := tp.history.Load(secret)
+    if ok {
+        atomic.AddUint64(value.(*uint64), 1)
+    } else {
+        var count uint64 = 1
+        tp.history.Store(secret, &count)
+    }
+}
 
 var ks []byte
 
@@ -13,15 +82,15 @@ func InitJwt(key string) {
 }
 
 type CustomClaims struct {
-    ID uint32    `json:"id"`
+    ID uint32 `json:"id"`
     IP string `json:"ip"`
     EX string `json:"ex"`
 }
 
-func CreateToken(id CustomClaims,key ...interface{}) (token string, err error) {
+func CreateToken(id CustomClaims, key ...interface{}) (token string, err error) {
     claim := jwt.MapClaims{
-        "id":  id.ID,
-        "ip":  id.IP,
+        "id": id.ID,
+        "ip": id.IP,
         "ex": time.Now().String(),
     }
     tokens := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
@@ -29,8 +98,8 @@ func CreateToken(id CustomClaims,key ...interface{}) (token string, err error) {
     return token, err
 }
 
-func ParseToken(tokens string) (id CustomClaims, err error){
-    token,err:=jwt.Parse(tokens, secret())
+func ParseToken(tokens string) (id CustomClaims, err error) {
+    token, err := jwt.Parse(tokens, secret())
     if err != nil {
         return
     }
