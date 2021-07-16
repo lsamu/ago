@@ -11,6 +11,7 @@ import (
     "time"
 )
 
+//TencentCOS TencentCOS
 type TencentCOS struct {
     Bucket     string
     Region     string
@@ -20,10 +21,12 @@ type TencentCOS struct {
     BaseURL    string
 }
 
+//NewTencentCOS NewTencentCOS
 func NewTencentCOS() (oo TencentCOS, err error) {
     return oo, err
 }
 
+//Upload Upload
 func (a *TencentCOS) Upload(file *multipart.FileHeader) (fullPath string, path string, err error) {
     client := a.NewClient()
     f, openError := file.Open()
@@ -38,6 +41,7 @@ func (a *TencentCOS) Upload(file *multipart.FileHeader) (fullPath string, path s
     return a.BaseURL + "/" + a.PathPrefix + "/" + fileKey, fileKey, nil
 }
 
+//Delete Delete
 func (a *TencentCOS) Delete(key string) (err error) {
     client := a.NewClient()
     name := a.PathPrefix + "/" + key
@@ -48,6 +52,7 @@ func (a *TencentCOS) Delete(key string) (err error) {
     return nil
 }
 
+//NewClient NewClient
 func (a *TencentCOS) NewClient() *cos.Client {
     urlStr, _ := url.Parse("https://" + a.Bucket + ".cos." + a.Region + ".myqcloud.com")
     baseURL := &cos.BaseURL{BucketURL: urlStr}

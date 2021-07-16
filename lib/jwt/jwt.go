@@ -11,7 +11,9 @@ import (
 const claimHistoryResetDuration = time.Hour * 24
 
 type (
+    //ParseOption ParseOption
     ParseOption func(parser *TokenParser)
+    //TokenParser TokenParser
     TokenParser struct {
         resetTime     time.Duration
         resetDuration time.Duration
@@ -77,16 +79,19 @@ func (tp *TokenParser) incrementCount(secret string) {
 
 var ks []byte
 
+//InitJwt InitJwt
 func InitJwt(key string) {
     ks = []byte(key)
 }
 
+//CustomClaims CustomClaims
 type CustomClaims struct {
     ID uint32 `json:"id"`
     IP string `json:"ip"`
     EX string `json:"ex"`
 }
 
+//CreateToken CreateToken
 func CreateToken(id CustomClaims, key ...interface{}) (token string, err error) {
     claim := jwt.MapClaims{
         "id": id.ID,
@@ -98,6 +103,7 @@ func CreateToken(id CustomClaims, key ...interface{}) (token string, err error) 
     return token, err
 }
 
+//ParseToken ParseToken
 func ParseToken(tokens string) (id CustomClaims, err error) {
     token, err := jwt.Parse(tokens, secret())
     if err != nil {

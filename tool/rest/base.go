@@ -5,6 +5,7 @@ import (
     "os"
 )
 
+//CreateTemplate CreateTemplate
 func CreateTemplate() {
     name := "zhw"
     tmpl, err := template.New("test").Parse("hello,{{.}}")

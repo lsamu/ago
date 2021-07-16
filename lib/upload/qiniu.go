@@ -10,6 +10,7 @@ import (
     "time"
 )
 
+//QiNiu QiNiu
 type QiNiu struct {
     Bucket        string
     AccessKey     string
@@ -20,10 +21,13 @@ type QiNiu struct {
     Zone          string
 }
 
+//NewQiNiu NewQiNiu
 func NewQiNiu() (oo QiNiu, err error) {
     return oo, err
 }
 
+
+//Upload Upload
 func (a *QiNiu) Upload(file *multipart.FileHeader) (fullPath string, path string, err error) {
     putPolicy := storage.PutPolicy{Scope: a.Bucket}
     mac := qbox.NewMac(a.AccessKey, a.SecretKey)
@@ -44,6 +48,7 @@ func (a *QiNiu) Upload(file *multipart.FileHeader) (fullPath string, path string
     return a.ImgPath + "/" + ret.Key, ret.Key, nil
 }
 
+//Delete Delete
 func (a *QiNiu) Delete(key string) (err error) {
     mac := qbox.NewMac(a.AccessKey, a.SecretKey)
     cfg := a.qiniuConfig()

@@ -1,4 +1,4 @@
-package httpTest
+package http_test
 
 import (
     "io/ioutil"
@@ -6,11 +6,12 @@ import (
     "strings"
 )
 
-// 接口测试
+// HTTPTest 接口测试
 type HTTPTest struct {
 
 }
 
+//NewHTTPTest NewHTTPTest
 func NewHTTPTest() *HTTPTest {
     return &HTTPTest{
     }

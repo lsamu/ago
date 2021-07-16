@@ -7,14 +7,15 @@ import (
 )
 
 type (
+    //Server Server
     Server struct {
-        conf RpcConf
+        conf RPCConf
         ss   *grpc.Server
         lis  net.Listener
     }
 )
-
-func NewServer(rpcConf RpcConf, callbackService func(server *grpc.Server)) *Server {
+//NewServer NewServer
+func NewServer(rpcConf RPCConf, callbackService func(server *grpc.Server)) *Server {
     lis, err := net.Listen("tcp", fmt.Sprintf("%d", rpcConf.Port))
     if err != nil {
         panic(err)
@@ -24,6 +25,7 @@ func NewServer(rpcConf RpcConf, callbackService func(server *grpc.Server)) *Serv
     return &Server{conf: rpcConf, lis: lis}
 }
 
+//Start Start
 func (s *Server) Start() {
     //proto.RegisterMsgServer(s, &services.MsgService{})
     err := s.ss.Serve(s.lis)
@@ -32,6 +34,7 @@ func (s *Server) Start() {
     }
 }
 
+//Stop Stop
 func (s *Server) Stop() {
 
 }

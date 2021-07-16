@@ -9,7 +9,7 @@ import (
 
 var redisConn *cache.Rediser
 
-// 连接redis
+// InitRedis 连接redis
 func InitRedis(address string,password string,db int) {
     conn, err := redis.Dial("tcp", address,
         redis.DialReadTimeout(10*time.Second),
@@ -25,7 +25,7 @@ func InitRedis(address string,password string,db int) {
     return
 }
 
-// 连接redis
+// RedisConn 连接redis
 func RedisConn() *cache.Rediser {
     return redisConn
 }

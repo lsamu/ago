@@ -109,7 +109,7 @@ func Errorf(template string, args ...interface{}) {
     sugaredLogger.Errorf(template, args...)
 }
 
-// Warningf uses fmt.Sprintf to log a templated message.
+// Warnf uses fmt.Sprintf to log a templated message.
 func Warnf(template string, args ...interface{}) {
     sugaredLogger.Warnf(template, args...)
 }

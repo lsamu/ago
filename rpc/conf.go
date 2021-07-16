@@ -8,17 +8,14 @@ import (
 )
 
 type (
-    RpcConf struct {
+    //RPCConf RPCConf
+    RPCConf struct {
         Host string
         Port int
     }
 )
 
-/**
- * @Description: 启动grpc服务 并注册服务
- * @param port 端口
- * @param callbackService 回调注册服务
- */
+//StartServer 启动grpc服务 并注册服务
 func StartServer(port string, callbackService func(server *grpc.Server)) {
     lis, err := net.Listen("tcp", port)
     if err != nil {
@@ -33,13 +30,7 @@ func StartServer(port string, callbackService func(server *grpc.Server)) {
     }
 }
 
-/**
- * @Description: 创建grpc客户端
- * @param ip
- * @param port
- * @return conn 链接
- * @return err
- */
+// StartClient 创建grpc客户端
 func StartClient(ip, port string) (conn *grpc.ClientConn, err error) {
     target := fmt.Sprintf("%s:%s", ip, port)
     conn, err = grpc.Dial(target, grpc.WithInsecure())

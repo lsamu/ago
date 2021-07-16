@@ -2,6 +2,7 @@ package http
 
 import "github.com/go-resty/resty/v2"
 
+//Get Get
 func Get(url string, headers map[string]string) (bs []byte, err error) {
     client := resty.New()
     resp, err := client.R().
@@ -14,8 +15,7 @@ func Get(url string, headers map[string]string) (bs []byte, err error) {
     return bs, err
 }
 
-//post:  map[string]interface  string  Struct []byte
-// raw
+//Post Post map[string]interface  string  Struct []byte
 func Post(url string, post interface{}, headers map[string]string) (bs []byte, err error) {
     client := resty.New()
     resp, err := client.R().
@@ -29,8 +29,7 @@ func Post(url string, post interface{}, headers map[string]string) (bs []byte, e
     return bs, err
 }
 
-//post:  map[string]interface  string  Struct []byte
-// raw
+//Put Put map[string]interface  string  Struct []byte
 func Put(url string, post interface{}, headers map[string]string) (bs []byte, err error) {
     client := resty.New()
     resp, err := client.R().
@@ -44,6 +43,7 @@ func Put(url string, post interface{}, headers map[string]string) (bs []byte, er
     return bs, err
 }
 
+//Delete Delete
 func Delete(url string, post interface{}, headers map[string]string) (bs []byte, err error) {
     client := resty.New()
     resp, err := client.R().

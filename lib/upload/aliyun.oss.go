@@ -8,13 +8,15 @@ import (
     "time"
 )
 
+//AliYunOSS AliYunOSS
 type AliYunOSS struct {
     bucket  *oss.Bucket
-    baseUrl string
+    baseURL string
 }
 
-func NewAliYunOSS(Endpoint, AccessKeyId, AccessKeySecret, BucketName, baseUrl string) (oo AliYunOSS, err error) {
-    client, err := oss.New(Endpoint, AccessKeyId, AccessKeySecret)
+//NewAliYunOSS NewAliYunOSS
+func NewAliYunOSS(Endpoint, AccessKeyID, AccessKeySecret, BucketName, baseURL string) (oo AliYunOSS, err error) {
+    client, err := oss.New(Endpoint, AccessKeyID, AccessKeySecret)
     if err != nil {
         return oo, err
     }
@@ -22,10 +24,11 @@ func NewAliYunOSS(Endpoint, AccessKeyId, AccessKeySecret, BucketName, baseUrl st
     if err != nil {
         return oo, err
     }
-    oo = AliYunOSS{bucket: bucket, baseUrl: baseUrl}
+    oo = AliYunOSS{bucket: bucket, baseURL: baseURL}
     return
 }
 
+//Upload Upload
 func (a *AliYunOSS) Upload(file *multipart.FileHeader) (fullPath string, path string, err error) {
     // 读取本地文件。
     f, openError := file.Open()
@@ -39,9 +42,10 @@ func (a *AliYunOSS) Upload(file *multipart.FileHeader) (fullPath string, path st
     if err != nil {
         return "", "", errors.New("function formUploader.Put() Failed, err:" + err.Error())
     }
-    return a.baseUrl + "/" + yunFileTmpPath, yunFileTmpPath, nil
+    return a.baseURL + "/" + yunFileTmpPath, yunFileTmpPath, nil
 }
 
+//Delete Delete
 func (a *AliYunOSS) Delete(key string) (err error) {
     // 删除单个文件。objectName表示删除OSS文件时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
     // 如需删除文件夹，请将objectName设置为对应的文件夹名称。如果文件夹非空，则需要将文件夹下的所有object删除后才能删除该文件夹。

@@ -66,39 +66,44 @@ func (c *Rediser) Subscription(channel string, handler EventHandler) error {
         }
     }
 }
-
+//HSet HSet
 func (c *Rediser) HSet(key, filed, value interface{}) error {
     return c.doCommand("HSET", key, filed, value)
 }
 
+//HGet HGet
 func (c *Rediser) HGet(key, filed interface{}) (string, error) {
     return c.doGetCommand("HGET", key, filed)
 }
 
+//HGetAll HGetAll
 func (c *Rediser) HGetAll(key interface{}) ([]string, error) {
     return redis.Strings(c.getCommand("HGETALL", key))
 }
 
+//HGetInt HGetInt
 func (c *Rediser) HGetInt(key, filed string) (int, error) {
     return c.doGetCommandInt("HGET", key, filed)
 }
 
+//HDel HDel
 func (c *Rediser) HDel(key, filed string) error {
     return c.doCommand("HDEL", key, filed)
 }
 
+//Del Del
 func (c *Rediser) Del(key string) error {
     return c.doCommand("DEL", key)
 }
-
+//Get Get
 func (c *Rediser) Get(key string) (string, error) {
     return c.doGetCommand("GET", key)
 }
-
+//Expire Expire
 func (c *Rediser) Expire(key string, ttl int) (error) {
     return c.doCommand("EXPIRE", key, ttl)
 }
-
+//Set Set
 func (c *Rediser) Set(key string, value interface{}, ttl int) error {
     err := c.doCommand("SET", key, value)
     if err != nil {

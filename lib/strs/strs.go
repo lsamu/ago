@@ -10,7 +10,7 @@ import (
     "time"
 )
 
-//获取随机码
+// GenCode 获取随机码
 func GenCode(width int) string {
     numeric := [10]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
     r := len(numeric)
@@ -29,6 +29,7 @@ var (
     pid     = os.Getpid()
 )
 
+//TraceID TraceID
 func TraceID() string {
     return fmt.Sprintf("trace-id-%d-%s-%d",
         os.Getpid(),

@@ -11,14 +11,17 @@ import (
     "time"
 )
 
+//Local Local
 type Local struct {
     Path string
 }
 
+//NewLocal NewLocal
 func NewLocal() (oo Local, err error) {
     return oo, err
 }
 
+//Upload Upload
 func (a *Local) Upload(file *multipart.FileHeader) (fullPath string, path1 string, err error) {
     // 读取文件后缀
     ext := path.Ext(file.Filename)
@@ -51,6 +54,7 @@ func (a *Local) Upload(file *multipart.FileHeader) (fullPath string, path1 strin
     return p, filename, nil
 }
 
+//Delete Delete
 func (a *Local) Delete(key string) (err error) {
     p := a.Path + "/" + key
     if strings.Contains(p, a.Path) {

@@ -9,9 +9,11 @@ import (
 )
 
 const (
-	ApplicationJson = "application/json"
+	//ApplicationJSON ApplicationJSON
+	ApplicationJSON = "application/json"
 )
 
+//Parse Parse
 func Parse(c *gin.Context, r interface{}) error {
 	//判断是否为json
 	err := c.ShouldBindJSON(r)

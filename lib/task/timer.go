@@ -7,6 +7,7 @@ import (
     "github.com/robfig/cron/v3"
 )
 
+//Timer Timer
 type Timer interface {
     AddTaskByFunc(taskName string, spec string, task func()) (cron.EntryID, error)
     AddTaskByJob(taskName string, spec string, job interface{ Run() }) (cron.EntryID, error)
@@ -104,7 +105,7 @@ func (t *timer) Close() {
         v.Stop()
     }
 }
-
+//NewTimerTask NewTimerTask
 func NewTimerTask() Timer {
     return &timer{taskList: make(map[string]*cron.Cron)}
 }

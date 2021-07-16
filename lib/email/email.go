@@ -4,7 +4,7 @@ import (
     "github.com/go-gomail/gomail"
     "strings"
 )
-
+//EmailParam EmailParam
 type EmailParam struct {
     // ServerHost 邮箱服务器地址，如腾讯企业邮箱为smtp.exmail.qq.com
     ServerHost string
@@ -27,6 +27,7 @@ var serverPort int
 
 var m *gomail.Message
 
+//Init Init
 func Init(ep *EmailParam)  {
     tos := []string{}
     serverHost = ep.ServerHost

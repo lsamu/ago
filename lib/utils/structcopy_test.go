@@ -6,13 +6,13 @@ import (
 
 func BenchmarkStructCopy(bench *testing.B) {
     a := struct {
-        Id     int
-        Name   string
+        ID   int
+        Name string
         Weight int
         a      int
     }{100, "Dog", 200, 9}
     b := struct {
-        Id   int
+        ID   int
         Name string
         Desc string
         b    int
@@ -24,13 +24,13 @@ func BenchmarkStructCopy(bench *testing.B) {
 
 func TestStructCopy(t *testing.T) {
     a := struct {
-        Id     int
-        Name   string
+        ID   int
+        Name string
         Weight int
         a      int
     }{100, "Dog", 200, 9}
     b := struct {
-        Id   int
+        ID   int
         Name string
         Desc string
         b    int
@@ -38,7 +38,7 @@ func TestStructCopy(t *testing.T) {
     err := StructCopy(&a, &b)
     if err != nil {
         t.Fatal(err)
-    } else if a.Id == b.Id && a.Name == b.Name {
+    } else if a.ID == b.ID && a.Name == b.Name {
         t.Log("Success")
     } else {
         t.Fatal("Copy Fail")

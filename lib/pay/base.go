@@ -8,6 +8,7 @@ import (
     "github.com/iGoogle-ink/gopay/alipay"
 )
 
+//InitWechatPay InitWechatPay
 func InitWechatPay()  {
     xlog.Debug("GoPay Version: ", gopay.Version)
     client,_ :=wechat.NewClientV3("","","","","")
@@ -22,6 +23,7 @@ func InitWechatPay()  {
     fmt.Println(rsp.SignInfo)
 }
 
+//InitAliPay InitAliPay
 func InitAliPay()  {
     xlog.Debug("GoPay Version: ", gopay.Version)
     client:=alipay.NewClient("","",false)
@@ -36,6 +38,7 @@ func InitAliPay()  {
     fmt.Println(rsp.Response)
 }
 
+//InitPayPal InitPayPal
 func InitPayPal()  {
     
 }

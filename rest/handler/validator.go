@@ -22,6 +22,7 @@ func init() {
 	_ = zh_translations.RegisterDefaultTranslations(validate, trans)
 }
 
+//Translate Translate
 func Translate(err error) string {
 	var result string
 	if fieldErr, ok := err.(validator.ValidationErrors); ok {

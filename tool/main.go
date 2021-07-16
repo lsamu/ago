@@ -45,6 +45,16 @@ func main() {
 			Usage:  "ago upgrade",
 			Action: upgrade.Upgrade,
 		},
+		{
+			Name:   "mysql",
+			Usage:  "ago upgrade",
+			Action: upgrade.Upgrade,
+		},
+		{
+			Name:   "migration",
+			Usage:  "ago upgrade",
+			Action: upgrade.Upgrade,
+		},
 	}
 	err := cmd.Run(os.Args)
 	if err != nil {

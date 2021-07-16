@@ -13,6 +13,7 @@ import (
     "strings"
 )
 
+//VerifyLocally VerifyLocally
 func VerifyLocally(publicKey string, licenseKey string) (verified bool, err error) {
     if publicKey == "" {
         return false, errors.New("public key shouldn't be empty")
@@ -32,6 +33,7 @@ func VerifyLocally(publicKey string, licenseKey string) (verified bool, err erro
     return token.Valid, err
 }
 
+//VerifyRemotely VerifyRemotely
 func VerifyRemotely(serverURL string, cert string, licenseKey string) (verified bool, err error) {
     form := url.Values{}
     form.Add("token", licenseKey)

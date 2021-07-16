@@ -13,12 +13,14 @@ import (
 import "github.com/gin-gonic/gin"
 
 type (
+    //Server Server
     Server struct {
         conf   RestConf
         engine *gin.Engine
         server *http.Server
         route  gin.IRoutes
     }
+    //Route Route
     Route struct {
         Method  string
         Path    string
@@ -26,7 +28,7 @@ type (
     }
 )
 
-//服务
+// NewServer 服务
 func NewServer(conf RestConf) *Server {
     engine := gin.Default()
     return &Server{
@@ -36,7 +38,7 @@ func NewServer(conf RestConf) *Server {
     }
 }
 
-//启动
+// Start 启动
 func (e *Server) Start() {
     bind := fmt.Sprintf("%s:%d", e.conf.Host, e.conf.Port)
     e.server = &http.Server{
@@ -67,36 +69,36 @@ func (e *Server) Start() {
     log.Println("Server exiting")
 }
 
-//停止服务
+// Stop 停止服务
 func (e *Server) Stop() {
     if err := e.server.Shutdown(nil); err != nil {
         panic(err)
     }
 }
 
-// 中间件
+// Use 中间件
 func (e *Server) Use(next gin.HandlerFunc) {
     e.route = e.route.Use(next)
 }
 
-// 添加路由
+// AddRoute 添加路由
 func (e *Server) AddRoute(route Route) {
     e.route = e.route.Handle(route.Method, route.Path, route.Handler)
 }
 
-// 添加路由
+// AddRoutes 添加路由
 func (e *Server) AddRoutes(routes []Route) {
     for _, route := range routes {
         e.route = e.route.Handle(route.Method, route.Path, route.Handler)
     }
 }
 
-// 获取路由引擎
+// GetEngine 获取路由引擎
 func (e *Server) GetEngine() *gin.Engine {
     return e.engine
 }
 
-// 添加路由
+// AddRouteCallback 添加路由
 func (e *Server) AddRouteCallback(routerCallback func(*gin.Engine)) {
     routerCallback(e.engine)
 }
