@@ -1,0 +1,415 @@
+版本号：Release 1.5.39
+修改记录：
+   (1) 微信V3：新增微信支付分（公共API）相关接口
+
+版本号：Release 1.5.38
+修改记录：
+   (1) 微信：去掉所以微信 client 方法中需要传证书的参数，请统一在初始化client时，添加证书
+   (2) 微信：使用方法请参考 wechat/client_test.go 下的初始化，以及各个方法使用
+
+版本号：Release 1.5.37
+修改记录：
+   (1) 支付宝：修改 client.FundAuthOrderAppFreeze() 接口返回参数
+   (2) 支付宝：新增 client.GetRequestSignParam()，获取已签名的完整请求参数
+   (3) 微信V3：增加 client.GetPlatformCerts()，获取微信平台证书公钥，增加注释说明
+   (4) 支付宝：拆分 _test.go 文件
+
+版本号：Release 1.5.36
+修改记录：
+   (1) 支付宝：新增 资金API 类别 接口实现
+   (2) 微信V3：修复银行转账接口，银行卡号和收款人的 RSA 加密bug
+   (3) 一些其他小修复调整
+
+版本号：Release 1.5.35
+修改记录：
+   (1) 微信V3：修复 普通支付回调通知 解密后的结构体问题
+   (2) 微信V3：新增 合单支付回调通知
+   (3) 微信V3：修复 退款回调通知 解密后的结构体问题
+
+版本号：Release 1.5.34
+修改记录：
+   (1) 微信V3：修复 client.GetPlatformCerts() 的返回值 code 问题
+   (2) ReadMe：补充 README.md 说明
+   (3) 微信V3：修复 PaySignOfApp() 签名出错的问题
+   (4) 微信V2：部分文件调整
+
+版本号：Release 1.5.32
+修改记录：
+   (1) xhttp：Fix bug about Transport
+
+版本号：Release 1.5.31
+修改记录：
+   (1) 微信：新增服务商支付接口
+
+版本号：Release 1.5.30
+修改记录：
+   (1) BodyMap：恢复 bm.Get() 方法获取的是string类型，增加 bm.GetInterface()
+   (2) 微信：新增V3版本退款查询接口
+
+版本号：Release 1.5.29
+发布时间：2021/02/27 22:49
+修改记录：
+   (1) 支付宝：新增 client.PostAliPayAPISelfV2()，比非V2版本更灵活化，具体参考 client_test.go 内的 TestClient_PostAliPayAPISelfV2() 方法
+   (2) BodyMap：新增 bm.SetFormFile() 的部分方法，修改 bm.Get() 方法，新增bm.GetString() 方法
+   (3) xHttp：更新 httpClient， httpClient.Type() 支持 TypeMultipartFormData 类型
+   (4) go mod 版本改为 1.14
+
+版本号：Release 1.5.28
+发布时间：2021/02/19 18:48
+修改记录：
+   (1) QQ：新增 client.AddCertFileContent()，解决无证书文件，只有证书内容的问题
+   (2) 支付宝：新增 alipay.VerifySyncSignWithCert()，同步证书验签
+   (3) 支付宝：新增 client.SetCertSnByContent()，通过应用公钥证书内容设置 app_cert_sn、alipay_root_cert_sn、alipay_cert_sn
+   (4) 支付宝：删除废弃接口 client.FundTransToaccountTransfer()
+   (5) fix BodyMap 的部分方法
+
+版本号：Release 1.5.27
+发布时间：2021/02/03 18:50
+修改记录：
+   (1) GoPay：去掉对 gotil 的强依赖
+
+版本号：Release 1.5.26
+发布时间：2021/01/29 19:38
+修改记录：
+   (1) 微信：重新整理文件分级，商户分账模块增加test方法说明
+   (2) BodyMap: 去除 GetArrayBodyMap()、GetBodyMap() 方法
+
+版本号：Release 1.5.25
+发布时间：2020/12/31 18:38
+修改记录：
+   (1) 微信：v3 基础支付接口完成，使用请参考：gopay/wechat/v3/client_test.go
+
+版本号：Release 1.5.24
+发布时间：2020/12/21 18:58
+修改记录：
+   (1) 微信：证书支持二选一，只传 apiclient_cert.pem 和 apiclient_key.pem 或者只传 apiclient_cert.p12
+
+版本号：Release 1.5.23
+发布时间：2020/12/15 17:58
+修改记录：
+   (1) 微信：新增 client.AddCertFileContent()，解决无证书文件，只有证书内容的问题
+
+版本号：Release 1.5.22
+发布时间：2020/12/04 02:58
+修改记录：
+   (1) 更新 gotil，修复xlog导致 go 1.14 以下版本报bug问题
+   (2) 采纳 WenyXu 的意见，优化BodyMap的用法
+
+版本号：Release 1.5.20
+发布时间：2020/09/30 23:58
+修改记录：
+   (1) 微信：client 添加 DebugSwitch 开关，默认关闭，不输出 请求参数和返回参数，通过 client.DebugSwitch = gopay.DebugOn 打开
+   (2) 支付宝：client 添加 DebugSwitch 开关，默认关闭，不输出 请求参数和返回参数，通过 client.DebugSwitch = gopay.DebugOn 打开
+   (3) QQ：client 添加 DebugSwitch 开关，默认关闭，不输出 请求参数和返回参数，通过 client.DebugSwitch = gopay.DebugOn 打开
+   (4) 更新 Gotil
+
+版本号：Release 1.5.19
+发布时间：2020/09/20 23:58
+修改记录：
+   (1) 微信：修复 client.ProfitSharingQuery() 接口的Bug，https://github.com/iGoogle-ink/gopay/issues/68
+   (2) 微信：优化 client.doProdPost()
+   (3) 支付宝：优化 client.doAliPay()
+   (4) 微信：项目文件区分改动，开放平台接口和微信公众号区分
+   (5) 微信：替换 wechat.GetAppLoginAccessToken() = > wechat.GetOauth2AccessToken()
+   (6) 微信：替换 wechat.RefreshAppLoginAccessToken() = > wechat.RefreshOauth2AccessToken()
+   (7) 微信：替换 wechat.GetUserInfoOpen() = > wechat.GetOauth2UserInfo()
+   (8) 微信：替换 wechat.GetUserInfo() = > wechat.GetPublicUserInfo()
+   (9) 微信：新增 wechat.CheckOauth2AccessToken() 检验授权凭证（access_token）是否有效
+   (10) 微信：新增 wechat.GetPublicUserInfoBatch() 批量获取用户基本信息（微信公众号）
+   (11) 微信：新增 client.SendCashRed() 发放现金红包
+   (12) 微信：新增 client.SendGroupCashRed() 发放现金裂变红包
+   (13) 微信：新增 client.SendAppletRed() 发放小程序红包
+   (14) 微信：新增 client.QueryRedRecord() 查询红包记录
+   (15) QQ：新增 client.SendCashRed() 创建现金红包，（未经测试，有条件的帮忙测一下吧，有问题提PR）
+   (16) QQ：新增 client.DownloadRedListFile() 对账单下载，（未经测试，有条件的帮忙测一下吧，有问题提PR）
+   (17) QQ：新增 client.QueryRedInfo() 查询红包详情，（未经测试，有条件的帮忙测一下吧，有问题提PR）
+
+版本号：Release 1.5.18
+发布时间：2020/08/29 18:30
+修改记录：
+   (1) 微信：修复 client.AddCertFilePath() 无效的Bug
+   (2) QQ：修复 client.AddCertFilePath() 无效的Bug
+   (3) Gotil：升级 gotil 到 v1.0.7-beta2 版本
+   (4) 支付宝：OpenAuthTokenAppResponse 结构体中 ExpiresIn、ReExpiresIn 字段改为int64（有用户反馈返回的是int类型，但文档写的是string），如果此处有问题，请立马联系改回去。
+
+版本号：Release 1.5.17
+发布时间：2020/08/23 15:30
+修改记录：
+   (1) 微信：Response model 增加字段
+   (2) ReadMe：修改部分遗留未更改的文档内容
+   (3) 支付宝：添加证书由只支持证书路径，改为支持证书路径或者这书Byte数组
+   (4) 支付宝：修复SystemOauthToken()方法未添加 AppCertSN 和 AliPayRootCertSN 的问题
+
+版本号：Release 1.5.16
+发布时间：2020/07/29 18:30
+修改记录：
+   (1) 微信：新增公共方法：wechat.GetUserInfoOpen()，微信开放平台：获取用户个人信息(UnionID机制)
+   (2) Gotil：升级 gotil 到 v1.0.4 版本
+   (3) 微信：新增ReadMe说明，微信支付下单等操作可用沙箱环境测试是否成功，但真正支付时，请使用正式环境，isProd = true，不然会报错
+
+版本号：Release 1.5.15
+发布时间：2020/07/09 18:30
+修改记录：
+   (1) 微信：新增client方法：client.ProfitSharing()，请求单次分账
+   (2) 微信：新增client方法：client.MultiProfitSharing()，请求多次分账
+   (3) 微信：新增client方法：client.ProfitSharingQuery()，查询分账结果
+   (4) 微信：新增client方法：client.ProfitSharingAddReceiver()，添加分账接收方
+   (5) 微信：新增client方法：client.ProfitSharingRemoveReceiver()，删除分账接收方
+   (6) 微信：新增client方法：client.ProfitSharingFinish()，完结分账
+   (7) 微信：新增client方法：client.ProfitSharingReturn()，分账回退
+   (8) 微信：新增client方法：client.ProfitSharingReturnQuery()，分账回退结果查询
+   (9) 微信：新增client方法：client.PayBank()，企业付款到银行卡API
+   (10) 微信：新增client方法：client.QueryBank()，查询企业付款到银行卡API
+   (11) 微信：新增client方法：client.GetRSAPublicKey()，获取RSA加密公钥API
+   (12) 微信：修改client方法名：client.PostRequest() -> client.PostWeChatAPISelf()
+   (13) QQ：修改client方法名：client.PostRequest() -> client.PostQQAPISelf()
+   (14) 说明：方法未经严格测试，还请开发者在开始使用时确认是否正常使用，有问题请提 issue
+
+版本号：Release 1.5.14
+发布时间：2020/06/27 3:30
+修改记录：
+   (1) 引入 github.com/iGoogle-ink/gotil 包
+   (2) 替换 log 输出样式
+   (3) 支付宝：新增client方法：client.PostAliPayAPISelf()，支付宝接口自行实现方法
+
+版本号：Release 1.5.12
+发布时间：2020/05/20 02:10
+修改记录：
+   (1) http_client：增加默认请求的超时时间 60s，增加 SetTimeout() 方法，可自定义超时时间
+   (2) 微信：修改 申请退款、退款查询、订单查询 接口的返回结构体，增加带下标的部分字段
+   (3) 微信：增加 申请退款、退款查询、订单查询 接口的返回值，新增了 resBm BodyMap 类型，方便接收结构体中未定义到的下标字段
+   (4) 微信：新增client方法：client.GetTransferInfo()，查询企业退款，此方法实际暂未测试，请自行测试，有问题提issue
+
+版本号：Release 1.5.11
+发布时间：2020/05/13 17:15
+修改记录：
+   (1) 支付宝：修复rsp解析出错的问题 client.SystemOauthToken()
+   (2) 微信：修改部分公共方法Rsp结构体参数问题，同步微信文档
+
+版本号：Release 1.5.10
+发布时间：2020/05/06 20:15
+修改记录：
+   (1) 微信：修改部分公共方法返回值结构体字段类型
+   (2) drone fix
+
+版本号：Release 1.5.9
+发布时间：2020/04/25 15:32
+修改记录：
+   (1) 支付宝：异步验签，推荐使用 alipay.ParseNotifyToBodyMap()，解析参数后参数在Verify验签时，推荐传入参数BodyMap bm。
+   (2) 支付宝：修改公共方法：alipay.ParseNotifyResultToBodyMap() 为 alipay.ParseNotifyToBodyMap()
+   (3) 支付宝：修改公共方法：alipay.ParseNotifyResultByURLValues() 为 alipay.ParseNotifyByURLValues()
+   (4) 支付宝：废弃公共方法：alipay.ParseNotifyResult()，因为异步通知有参数因为支付接口不同，返回的字段不同，无法使用结构体全部定义好
+   (5) 支付宝：调整了部分接口的文档地址
+   (6) 微信：修改公共方法：wechat.ParseNotifyResultToBodyMap() 为 wechat.ParseNotifyToBodyMap()
+   (7) 微信：修改公共方法：wechat.ParseNotifyResult() 为 wechat.ParseNotify()
+   (8) 微信：修改公告方法：wechat.ParseRefundNotifyResult() 为 wechat.ParseRefundNotify()
+
+版本号：Release 1.5.8
+发布时间：2020/04/18 21:32
+修改记录：
+   (1) 微信：新增Client方法：client.PostRequest()，向微信发送Post请求，对于本库未提供的微信API，可自行实现，通过此方法发送请求
+   (2) 微信：微信同步返回结构体类型全部修改为string类型，验签出错的问题
+   (3) 微信：Client方法，需要传证书的接口方法，入参类型统一改为interface{},无需传证书地址时，由 "" 改为 nil
+   (4) QQ：同微信改动
+   (5) 支付宝：model结构体参数全部修改为string类型
+
+版本号：Release 1.5.7
+发布时间：2020/03/25 20:32
+修改记录：
+   (1) 支付宝：修改 client.UserCertifyOpenQuery() 方法的返回值解析类型报错问题，官方文档类型实例有误
+
+版本号：Release 1.5.6
+发布时间：2020/03/06 17:32
+修改记录：
+   (1) 支付宝：新增Client方法：client.SetPrivateKeyType()，设置 支付宝 私钥类型，alipay.PKCS1 或 alipay.PKCS8，默认 PKCS1。
+   (2) 支付宝：修改公共方法：alipay.GetRsaSign()，增加了私钥类型参数，并将私钥的格式化操作，移动到该方法内，传入的私钥无需事先格式化。
+
+版本号：Release 1.5.5
+发布时间：2020/03/05 18:32
+修改记录：
+   (1) 支付宝：新增Client方法：client.DataBillBalanceQuery()，支付宝商家账户当前余额查询。
+   (2) 支付宝：新增Client方法：client.DataBillDownloadUrlQuery()，查询对账单下载地址。
+   (3) 支付宝：开放公共方法：alipay.GetRsaSign()，获取支付宝参数签名（参数sign值）。
+   (4) 支付宝：开放公共方法：alipay.FormatURLParam()，格式化支付宝请求URL参数。
+   (5) 支付宝：新增公共方法：alipay.ParseNotifyResultByURLValues()，通过 url.Values 解析支付宝支付异步通知的参数到Struct。
+
+版本号：Release 1.5.4
+发布时间：2020/02/29 14:32
+修改记录：
+   (1) 支付宝：新增Client方法：client.UserInfoAuth()，用户登陆授权。（方法未测试通过，待有测试条件的同学测试一下吧）
+   (2) 支付宝：新增公共方法：alipay.MonitorHeartbeatSyn()，验签接口。（方法未测试通过，待有测试条件的同学测试一下吧）
+
+版本号：Release 1.5.3
+发布时间：2020/02/19 11:32
+修改记录：
+   (1) 支付宝：修改公共方法：SystemOauthToken()，添加参数 signType
+
+版本号：Release 1.5.2
+发布时间：2020/02/14 13:32
+修改记录：
+   (1) 支付宝：官方单笔转账接口更新，新增Client方法：client.FundTransUniTransfer()，单笔转账接口
+   (2) 支付宝：新增Client方法：client.FundTransCommonQuery()，转账业务单据查询接口
+   (3) 支付宝：新增Client放大：client.FundAccountQuery()，支付宝资金账户资产查询接口
+   (3) 支付宝：Client的方法，必选参数校验
+
+版本号：Release 1.5.1
+发布时间：2020/01/03 17:32
+修改记录：
+   (1) 由于下载包需要 /v2 的问题，替换版本号到 1.x，代码不变，只改变版本号记录
+
+版本号：Release 2.0.5
+发布时间：2020/01/01 22:55
+修改记录：
+   (1) 添加一些函数参数判空操作，避免Panic
+   (2) 去掉不用的结构体 ReturnMessage
+   (3) 去掉 go mod v1.4.8版本的依赖
+
+版本号：Release 2.0.4
+发布时间：2019/12/24 14:29
+修改记录：
+   (1) 支付宝：新增支付宝公钥文件验证签方法（公钥证书模式）：client.VerifySignWithCert()
+
+版本号：Release 2.0.3
+发布时间：2019/12/18 19:25
+修改记录：
+   (1) 微信：新增Client方法：client.AuthCodeToOpenId()，授权码查询OpenId（正式）
+   (2) 微信：新增Client方法：client.Report()，交易保障
+   (3) 微信：新增Client方法：client.EntrustPublic()，公众号纯签约（正式）
+   (4) 微信：新增Client方法：client.EntrustAppPre()，APP纯签约-预签约接口-获取预签约ID（正式）
+   (5) 微信：新增Client方法：client.EntrustH5()，H5纯签约（正式）
+   (5) 微信：新增Client方法：client.EntrustPaying()，支付中签约（正式）
+
+版本号：Release 2.0.2
+发布时间：2019/12/13 23:25
+修改记录：
+   (1) 微信：删除Client方法：client.AddCertFileByte()
+   (2) 版本限制 golang 1.13，fmt.Errorf() 使用 %w 格式化 error，1.13新特性
+
+版本号：Release 2.0.1
+发布时间：2019/12/13 17:20
+修改记录：
+   (1) 处理 go mod 包，go get github.com/iGoogle-ink/gopay/v2
+
+版本号：Release 2.0.0
+发布时间：2019/12/12 18:22
+修改记录：
+   (1) 按支付渠道模块分包大调整
+   (2) 一大推细小改动，不一一描述了
+   (3) 支付宝：修改公共API方法：alipay.GetCertSN()，不再支持支付宝根证书的SN获取
+   (4) 支付宝：新增公共API方法：alipay.GetRootCertSN()，获取root证书序列号SN
+   (5) 支付宝：新增Client方法：alipay.SetLocation()，设置时区，不设置或出错均为默认服务器时间
+
+版本号：Release 1.4.8
+发布时间：2019/12/11 16:40
+修改记录：
+   (1) 1.几 最后一个版本
+   (2) 修复一些问题
+   (3) 支付宝：修改公共API方法：gopay.GetCertSN()，不再支持支付宝根证书的SN获取
+   (4) 支付宝：新增公共API方法：gopay.GetRootCertSN()，获取root证书序列号SN
+   (5) 微信：修改公共API方法：gopay.GetWeChatSanBoxParamSign()，修复 沙箱验签出错问题
+
+版本号：Release 1.4.6
+发布时间：2019/12/09 18:37
+修改记录：
+   (1) 移除第三方http请求库，自己封装了一个请求库使用，解决不会设置 goproxy 无法下载包的问题
+   (2) 使用中如有问题，请微信联系作者处理 或 提issue
+
+版本号：Release 1.4.5
+发布时间：2019/12/07 21:56
+修改记录：
+   (1) 支付宝：修复 公钥证书模式 下，同步返回参数接收问题，返回接收结构体增加参数 alipay_cert_sn，同步返回证书模式验签，暂时未解决
+   (2) 支付宝：修改公共API方法：gopay.VerifyAliPaySign()，不再支持同步验签，只做异步通知验签
+   (3) 支付宝：新增公共API方法：gopay.VerifyAliPaySyncSign()，支付宝同步返回验签
+   (4) 支付宝：新增Client方法：client.SetAliPayPublicCertSN()，设置 支付宝公钥证书SN，通过 gopay.GetCertSN() 获取 alipay_cert_sn
+   (5) 支付宝：新增Client方法：client.SetAppCertSnByPath()，设置 app_cert_sn 通过应用公钥证书路径
+   (6) 支付宝：新增Client方法：client.SetAliPayPublicCertSnByPath()，设置 alipay_cert_sn 通过 支付宝公钥证书文件路径
+   (7) 支付宝：新增Client方法：client.SetAliPayRootCertSnByPath()，设置 alipay_root_cert_sn 通过支付宝CA根证书文件路径
+
+版本号：Release 1.4.4
+发布时间：2019/11/16 15:56
+修改记录：
+   (1) 支付宝：新增公共API方法：gopay.ParseAliPayNotifyResultToBodyMap()，解析支付宝支付异步通知的参数到BodyMap
+   (2) 支付宝：修改公共API方法：gopay.VerifyAliPaySign()，支付宝异步验签支持传入 BodyMap
+   (3) 微信：新增Client方法：client.AddCertFileByte()，添加微信证书 Byte 数组
+   (4) 微信：新增Client方法：client.AddCertFilePath()，添加微信证书 Path 路径
+   (5) 微信：微信Client需要证书的方法，如已使用client.AddCertFilePath()或client.AddCertFileByte()添加过证书，参数certFilePath、keyFilePath、pkcs12FilePath全传空字符串 ""，否则，3证书Path均不可空
+   (6) BodyMap 的Set方法去掉switch判断，直接赋值
+   (7) WeChatClient、AliPayClient 加锁
+   (8) 修改部分小问题和部分样式
+
+版本号：Release 1.4.3
+发布时间：2019/11/12 01:15
+修改记录：
+   (1) 微信：新增公共API方法：gopay.ParseWeChatRefundNotifyResult()，解析微信退款异步通知的请求参数
+   (2) 微信：新增公共API方法：gopay.DecryptRefundNotifyReqInfo()，解密微信退款异步通知的加密数据
+   (3) 支付宝：修改Client方法：client.AliPayUserCertifyOpenCertify()，身份认证开始认证（获取认证链接）
+   (4) 修改部分小问题
+
+版本号：Release 1.4.2
+发布时间：2019/11/11 16:43
+修改记录：
+   (1) 支付宝：新增Client方法：client.AliPayUserCertifyOpenInit()，身份认证初始化服务
+   (2) 支付宝：新增Client方法：client.AliPayUserCertifyOpenCertify()，身份认证开始认证
+   (3) 支付宝：新增Client方法：client.AliPayUserCertifyOpenQuery()，身份认证记录查询
+   (4) 支付宝：所有方法的返回结构体下的 XxxResponse 字段，统一修改为 Response，如：
+       type AliPayTradeCreateResponse struct {
+        Response createResponse `json:"alipay_trade_create_response,omitempty"`
+        SignData string         `json:"-"`
+        Sign     string         `json:"sign"`
+       }
+   (5) 支付宝：修改一些代码格式问题
+   (6) 支付宝：client.AlipayOpenAuthTokenApp() 修改为 client.AliPayOpenAuthTokenApp()
+
+版本号：Release 1.4.1
+发布时间：2019/11/04 14:28
+修改记录：
+   (1) 支付宝：修改公共API方法：GetCertSN()，修复获取支付宝根证书获取 sn 的问题（wziww）
+   (2) 支付宝：新增Client方法：client.SetAppCertSN()，可自行获取公钥 sn 并赋值
+   (3) 支付宝：新增Client方法：client.SetAliPayRootCertSN()，可自行获取根证书 sn 并赋值
+
+版本号：Release 1.4.0
+发布时间：2019/10/10 13:51
+修改记录：
+   (1) AliPayNotifyRequest 结构体，新增加两个字段：method、timestamp，修复电脑网站支付，配置 return_url 支付成功后，支付宝请求该 return_url 返回参数验签失败的问题
+   (2) 去除支付宝老验签方法 VerifyAliPayResultSign()
+   (3) 去除微信老验签方法 VerifyWeChatResultSign()
+
+版本号：Release 1.3.9
+发布时间：2019/09/30 00:01
+修改记录：
+   (1) 修复支付宝支付验签出错的问题！
+
+版本号：Release 1.3.8
+发布时间：2019/09/24 17:51
+修改记录：
+   (1) 代码风格修改更新
+
+版本号：Release 1.3.7
+发布时间：2019/09/22 11:41
+修改记录：
+   (1) README 增加 go mod 安装gopay的方法指导
+
+版本号：Release 1.3.6
+发布时间：2019/09/09 23:51
+修改记录：
+   (1) 新增支付宝Client方法：client.AlipayUserInfoShare() => 支付宝会员授权信息查询接口（App支付宝登录）
+
+版本号：Release 1.3.6
+发布时间：2019/09/05 02:55
+修改记录：
+   (1) 更改微信公共API方法名称：gopay.GetAccessToken() to gopay.GetWeChatAppletAccessToken() => 获取微信小程序全局唯一后台接口调用凭据
+   (2) 更改微信公共API方法名称：gopay.GetPaidUnionId() to gopay.GetWeChatAppletPaidUnionId() => 微信小程序用户支付完成后，获取该用户的 UnionId，无需用户授权
+   (3) 新增微信公共API方法：gopay.GetAppWeChatLoginAccessToken() => App应用微信第三方登录，code换取access_token
+   (4) 新增微信公共API方法：gopay.RefreshAppWeChatLoginAccessToken() => 刷新App应用微信第三方登录后，获取的 access_token
+
+版本号：Release 1.3.5
+发布时间：2019/09/05 02:10
+修改记录：
+   (1) 支付宝、微信Client 由私有改为公有
+
+版本号：Release 1.3.4
+发布时间：2019/09/03 19:26
+修改记录：
+   (1) 新增支付宝公共API方法：gopay.GetCertSN() => 获取证书SN号（app_cert_sn、alipay_root_cert_sn、alipay_cert_sn）
+   (2) 新增支付宝Client方法：client.SetAliPayRootCertSN() => 设置支付宝根证书SN，通过 gopay.GetCertSN() 获取
+   (3) 新增支付宝Client方法：client.SetAppCertSN() => 设置应用公钥证书SN，通过 gopay.GetCertSN() 获取

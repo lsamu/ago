@@ -16,7 +16,7 @@ func main() {
         Method:  "GET",
         Path:    "/",
         Handler: func(c *gin.Context) {
-
+            c.String(200,"hello ago!")
         },
     })
     server.Start()

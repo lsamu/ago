@@ -14,3 +14,13 @@ github:
 
 lint:
 	golint ./...
+
+local-rest:
+	go run -mod=vendor ./examples/rest/main.go
+
+local-sock-server:
+	go run -mod=vendor ./examples/sock.server/main.go
+
+local-sock-client:
+	go run -mod=vendor ./examples/sock.client/main.go
+
