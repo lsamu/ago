@@ -39,6 +39,8 @@ github.com/go-playground/validator/v10/translations/zh
 # github.com/go-resty/resty/v2 v2.6.0
 ## explicit
 github.com/go-resty/resty/v2
+# github.com/gofrs/uuid v4.0.0+incompatible
+github.com/gofrs/uuid
 # github.com/golang/protobuf v1.4.3
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
@@ -53,6 +55,19 @@ github.com/google/go-querystring/query
 # github.com/google/uuid v1.1.2
 ## explicit
 github.com/google/uuid
+# github.com/googollee/go-socket.io v1.6.0
+## explicit
+github.com/googollee/go-socket.io
+github.com/googollee/go-socket.io/engineio
+github.com/googollee/go-socket.io/engineio/frame
+github.com/googollee/go-socket.io/engineio/packet
+github.com/googollee/go-socket.io/engineio/payload
+github.com/googollee/go-socket.io/engineio/session
+github.com/googollee/go-socket.io/engineio/transport
+github.com/googollee/go-socket.io/engineio/transport/polling
+github.com/googollee/go-socket.io/engineio/transport/utils
+github.com/googollee/go-socket.io/engineio/transport/websocket
+github.com/googollee/go-socket.io/parser
 # github.com/gookit/color v1.3.6
 github.com/gookit/color
 # github.com/gorilla/websocket v1.4.2

@@ -15,6 +15,7 @@ require (
 	github.com/go-resty/resty/v2 v2.6.0
 	github.com/gomodule/redigo v1.8.5
 	github.com/google/uuid v1.1.2
+	github.com/googollee/go-socket.io v1.6.0
 	github.com/iGoogle-ink/gopay v1.5.39
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/qiniu/api.v7/v7 v7.8.2
