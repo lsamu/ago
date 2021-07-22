@@ -1,9 +1,9 @@
-package arpc
+package rpca
 
 import (
     "fmt"
     grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-    "github.com/lsamu/ago/arpc/use"
+    "github.com/lsamu/ago/rpca/use"
     "google.golang.org/grpc"
     "net"
 )
