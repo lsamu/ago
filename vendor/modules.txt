@@ -3,7 +3,7 @@
 github.com/aliyun/aliyun-oss-go-sdk/oss
 # github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f
 ## explicit
-# github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d
+# github.com/cpuguy83/go-md2man/v2 v2.0.0
 github.com/cpuguy83/go-md2man/v2/md2man
 # github.com/dgrijalva/jwt-go v3.2.0+incompatible
 ## explicit
@@ -12,6 +12,8 @@ github.com/dgrijalva/jwt-go
 ## explicit
 github.com/eclipse/paho.mqtt.golang
 github.com/eclipse/paho.mqtt.golang/packets
+# github.com/fullstorydev/grpcui v1.1.0
+## explicit
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
 # github.com/gin-gonic/gin v1.7.2
@@ -52,7 +54,7 @@ github.com/golang/protobuf/ptypes/timestamp
 github.com/gomodule/redigo/redis
 # github.com/google/go-querystring v1.0.0
 github.com/google/go-querystring/query
-# github.com/google/uuid v1.1.2
+# github.com/google/uuid v1.3.0
 ## explicit
 github.com/google/uuid
 # github.com/googollee/go-socket.io v1.6.0
@@ -68,7 +70,7 @@ github.com/googollee/go-socket.io/engineio/transport/polling
 github.com/googollee/go-socket.io/engineio/transport/utils
 github.com/googollee/go-socket.io/engineio/transport/websocket
 github.com/googollee/go-socket.io/parser
-# github.com/gookit/color v1.3.6
+# github.com/gookit/color v1.4.2
 github.com/gookit/color
 # github.com/gorilla/websocket v1.4.2
 github.com/gorilla/websocket
@@ -85,15 +87,15 @@ github.com/iGoogle-ink/gopay/pkg/util
 github.com/iGoogle-ink/gopay/pkg/xhttp
 github.com/iGoogle-ink/gopay/pkg/xlog
 github.com/iGoogle-ink/gopay/wechat/v3
-# github.com/json-iterator/go v1.1.9
+# github.com/json-iterator/go v1.1.10
 github.com/json-iterator/go
 # github.com/leodido/go-urn v1.2.0
 github.com/leodido/go-urn
 # github.com/mattn/go-isatty v0.0.12
 github.com/mattn/go-isatty
-# github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421
+# github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 github.com/modern-go/concurrent
-# github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742
+# github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
 # github.com/mozillazg/go-httpheader v0.2.1
 github.com/mozillazg/go-httpheader
@@ -118,6 +120,8 @@ github.com/robfig/cron/v3
 github.com/russross/blackfriday/v2
 # github.com/satori/go.uuid v1.2.0
 ## explicit
+# github.com/securego/gosec/v2 v2.8.1
+## explicit
 # github.com/shurcooL/sanitized_anchor_name v1.0.0
 github.com/shurcooL/sanitized_anchor_name
 # github.com/tencentyun/cos-go-sdk-v5 v0.7.27
@@ -128,6 +132,8 @@ github.com/ugorji/go/codec
 # github.com/urfave/cli/v2 v2.3.0
 ## explicit
 github.com/urfave/cli/v2
+# github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778
+github.com/xo/terminfo
 # go.uber.org/atomic v1.7.0
 go.uber.org/atomic
 # go.uber.org/multierr v1.6.0
@@ -140,8 +146,10 @@ go.uber.org/zap/internal/bufferpool
 go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83
+# golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
 golang.org/x/crypto/sha3
+# golang.org/x/lint v0.0.0-20210508222113-6edffad5e616
+## explicit
 # golang.org/x/net v0.0.0-20210716203947-853a461950ff
 ## explicit
 golang.org/x/net/http/httpguts
@@ -160,6 +168,7 @@ golang.org/x/sync/singleflight
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
+golang.org/x/sys/windows
 # golang.org/x/text v0.3.6
 golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
@@ -253,5 +262,5 @@ google.golang.org/protobuf/types/known/timestamppb
 gopkg.in/alexcesaro/quotedprintable.v3
 # gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 ## explicit
-# gopkg.in/yaml.v2 v2.2.8
+# gopkg.in/yaml.v2 v2.4.0
 gopkg.in/yaml.v2

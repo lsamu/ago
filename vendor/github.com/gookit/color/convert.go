@@ -3,16 +3,62 @@ package color
 import (
 	"fmt"
 	"math"
+	"strconv"
+	"strings"
 )
 
-// adapted from https://gist.github.com/MicahElliott/719710
 var (
-	c256ToRgb = map[uint8]string{}
+	// ---------- basic(16) <=> 256 color convert ----------
+	basicTo256Map = map[uint8]uint8{
+		30: 0,   // black 	000000
+		31: 160, // red 	c51e14
+		32: 34,  // green 	1dc121
+		33: 184, // yellow 	c7c329
+		34: 20,  // blue 	0a2fc4
+		35: 170, // magenta c839c5
+		36: 44,  // cyan 	20c5c6
+		37: 188, // white 	c7c7c7
+		90: 59,  // lightBlack 		686868
+		91: 203, // lightRed 		fd6f6b
+		92: 83,  // lightGreen 		67f86f
+		93: 227, // lightYellow 	fffa72
+		94: 69,  // lightBlue 		6a76fb
+		95: 213, // lightMagenta 	fd7cfc
+		96: 87,  // lightCyan 		68fdfe
+		97: 15,  // lightWhite 		ffffff
+	}
+
+	// ---------- basic(16) <=> RGB color convert ----------
+	// refer from Hyper app
+	basic2hexMap = map[uint8]string{
+		30: "000000", // black
+		31: "c51e14", // red
+		32: "1dc121", // green
+		33: "c7c329", // yellow
+		34: "0a2fc4", // blue
+		35: "c839c5", // magenta
+		36: "20c5c6", // cyan
+		37: "c7c7c7", // white
+		90: "686868", // lightBlack/darkGray
+		91: "fd6f6b", // lightRed
+		92: "67f86f", // lightGreen
+		93: "fffa72", // lightYellow
+		94: "6a76fb", // lightBlue
+		95: "fd7cfc", // lightMagenta
+		96: "68fdfe", // lightCyan
+		97: "ffffff", // lightWhite
+	}
+	// will convert data from basic2hexMap
+	hex2basicMap = initHex2basicMap()
+
+	// ---------- 256 <=> RGB color convert ----------
+	// adapted from https://gist.github.com/MicahElliott/719710
+
+	c256ToHexMap = init256ToHexMap()
 
 	// rgb to 256 color look-up table
-	lookupTable = map[string]uint8{
-		// 8-bit, RGB hex
-
+	// RGB hex => 256 code
+	hexTo256Table = map[string]uint8{
 		// Primary 3-bit (8 colors). Unique representation!
 		"000000": 0,
 		"800000": 1,
@@ -292,13 +338,195 @@ var (
 	incs = []uint8{0x00, 0x5f, 0x87, 0xaf, 0xd7, 0xff}
 )
 
+func initHex2basicMap() map[string]uint8 {
+	h2b := make(map[string]uint8, len(basic2hexMap))
+	// ini data map
+	for u, s := range basic2hexMap {
+		h2b[s] = u
+	}
+	return h2b
+}
+
+func init256ToHexMap() map[uint8]string {
+	c256toh := make(map[uint8]string, len(hexTo256Table))
+	// ini data map
+	for hex, c256 := range hexTo256Table {
+		c256toh[c256] = hex
+	}
+	return c256toh
+}
+
 // RgbTo256Table mapping data
 func RgbTo256Table() map[string]uint8 {
-	return lookupTable
+	return hexTo256Table
 }
+
+// Colors2code convert colors to code. return like "32;45;3"
+func Colors2code(colors ...Color) string {
+	if len(colors) == 0 {
+		return ""
+	}
+
+	var codes []string
+	for _, color := range colors {
+		codes = append(codes, color.String())
+	}
+
+	return strings.Join(codes, ";")
+}
+
+/*************************************************************
+ * HEX code <=> RGB/True color code
+ *************************************************************/
+
+// Hex2rgb alias of the HexToRgb()
+func Hex2rgb(hex string) []int { return HexToRgb(hex) }
+
+// HexToRGB alias of the HexToRgb()
+func HexToRGB(hex string) []int { return HexToRgb(hex) }
+
+// HexToRgb convert hex color string to RGB numbers
+//
+// Usage:
+// 	rgb := HexToRgb("ccc") // rgb: [204 204 204]
+// 	rgb := HexToRgb("aabbcc") // rgb: [170 187 204]
+// 	rgb := HexToRgb("#aabbcc") // rgb: [170 187 204]
+// 	rgb := HexToRgb("0xad99c0") // rgb: [170 187 204]
+func HexToRgb(hex string) (rgb []int) {
+	hex = strings.TrimSpace(hex)
+	if hex == "" {
+		return
+	}
+
+	// like from css. eg "#ccc" "#ad99c0"
+	if hex[0] == '#' {
+		hex = hex[1:]
+	}
+
+	hex = strings.ToLower(hex)
+	switch len(hex) {
+	case 3: // "ccc"
+		hex = string([]byte{hex[0], hex[0], hex[1], hex[1], hex[2], hex[2]})
+	case 8: // "0xad99c0"
+		hex = strings.TrimPrefix(hex, "0x")
+	}
+
+	// recheck
+	if len(hex) != 6 {
+		return
+	}
+
+	// convert string to int64
+	if i64, err := strconv.ParseInt(hex, 16, 32); err == nil {
+		color := int(i64)
+		// parse int
+		rgb = make([]int, 3)
+		rgb[0] = color >> 16
+		rgb[1] = (color & 0x00FF00) >> 8
+		rgb[2] = color & 0x0000FF
+	}
+	return
+}
+
+// Rgb2hex alias of the RgbToHex()
+func Rgb2hex(rgb []int) string { return RgbToHex(rgb) }
+
+// RgbToHex convert RGB-code to hex-code
+//
+// Usage:
+//	hex := RgbToHex([]int{170, 187, 204}) // hex: "aabbcc"
+func RgbToHex(rgb []int) string {
+	hexNodes := make([]string, len(rgb))
+
+	for _, v := range rgb {
+		hexNodes = append(hexNodes, strconv.FormatInt(int64(v), 16))
+	}
+	return strings.Join(hexNodes, "")
+}
+
+/*************************************************************
+ * 4bit(16) color <=> RGB/True color
+ *************************************************************/
+
+// Basic2hex convert basic color to hex string.
+func Basic2hex(val uint8) string {
+	return basic2hexMap[val]
+}
+
+// Hex2basic convert hex string to basic color code.
+func Hex2basic(hex string) uint8 {
+	return hex2basicMap[hex]
+}
+
+// Rgb2basic alias of the RgbToAnsi()
+func Rgb2basic(r, g, b uint8, isBg bool) uint8 {
+	// is basic color, direct use static map data.
+	hex := RgbToHex([]int{int(r), int(g), int(b)})
+	if val, ok := hex2basicMap[hex]; ok {
+		if isBg {
+			return val + 10
+		}
+		return val
+	}
+
+	return RgbToAnsi(r, g, b, isBg)
+}
+
+// Rgb2ansi alias of the RgbToAnsi()
+func Rgb2ansi(r, g, b uint8, isBg bool) uint8 {
+	return RgbToAnsi(r, g, b, isBg)
+}
+
+// RgbToAnsi convert RGB-code to 16-code
+// refer https://github.com/radareorg/radare2/blob/master/libr/cons/rgb.c#L249-L271
+func RgbToAnsi(r, g, b uint8, isBg bool) uint8 {
+	var bright, c, k uint8
+	base := compareVal(isBg, BgBase, FgBase)
+
+	// eco bright-specific
+	if r == 0x80 && g == 0x80 && b == 0x80 { // 0x80=128
+		bright = 53
+	} else if r == 0xff || g == 0xff || b == 0xff { // 0xff=255
+		bright = 60
+	} // else bright = 0
+
+	if r == g && g == b {
+		// 0x7f=127
+		// r = (r > 0x7f) ? 1 : 0;
+		r = compareVal(r > 0x7f, 1, 0)
+		g = compareVal(g > 0x7f, 1, 0)
+		b = compareVal(b > 0x7f, 1, 0)
+	} else {
+		k = (r + g + b) / 3
+
+		// r = (r >= k) ? 1 : 0;
+		r = compareVal(r >= k, 1, 0)
+		g = compareVal(g >= k, 1, 0)
+		b = compareVal(b >= k, 1, 0)
+	}
+
+	// c = (r ? 1 : 0) + (g ? (b ? 6 : 2) : (b ? 4 : 0))
+	c = compareVal(r > 0, 1, 0)
+
+	if g > 0 {
+		c += compareVal(b > 0, 6, 2)
+	} else {
+		c += compareVal(b > 0, 4, 0)
+	}
+	return base + bright + c
+}
+
+/*************************************************************
+ * 8bit(256) color <=> RGB/True color
+ *************************************************************/
 
 // Rgb2short convert RGB-code to 256-code
 func Rgb2short(r, g, b uint8) uint8 {
+	return RgbTo256(r, g, b)
+}
+
+// RgbTo256 convert RGB-code to 256-code
+func RgbTo256(r, g, b uint8) uint8 {
 	res := make([]uint8, 3)
 	for partI, part := range [3]uint8{r, g, b} {
 		i := 0
@@ -320,24 +548,13 @@ func Rgb2short(r, g, b uint8) uint8 {
 		}
 	}
 	hex := fmt.Sprintf("%02x%02x%02x", res[0], res[1], res[2])
-	equiv := lookupTable[hex]
+	equiv := hexTo256Table[hex]
 	return equiv
 }
 
 // C256ToRgb convert an 256 color code to RGB numbers
 func C256ToRgb(val uint8) (rgb []uint8) {
-	// TODO use sync.Once
-	if len(c256ToRgb) == 0 {
-		for hex, c256 := range lookupTable {
-			c256ToRgb[c256] = hex
-		}
-	}
-
-	hex, ok := c256ToRgb[val]
-	if false == ok {
-		return
-	}
-
+	hex := c256ToHexMap[val]
 	// convert to rgb code
 	rgbInts := Hex2rgb(hex)
 

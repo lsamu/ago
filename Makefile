@@ -30,3 +30,8 @@ local-sock-client:
 local-cron:
 	go run -mod=vendor ./examples/cron/main.go
 
+install:
+	go get -u golang.org/x/lint/golint
+	go get -u github.com/securego/gosec/v2/cmd/gosec
+
+
