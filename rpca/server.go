@@ -26,10 +26,10 @@ func NewServer(rpcConf ServerConf, callbackService func(server *grpc.Server)) *S
 
     //注册中间件
     ss := grpc.NewServer(
-        grpc.StreamInterceptor(
-            grpc_middleware.ChainStreamServer(
-                use.Auth(),
-            )),
+        //grpc.StreamInterceptor(
+        //    grpc_middleware.ChainStreamServer(
+        //        use.Auth(),
+        //    )),
         grpc.UnaryInterceptor(
             grpc_middleware.ChainUnaryServer(
                 use.Auth2(),
@@ -51,4 +51,9 @@ func (s *Server) Start() {
 //Stop Stop
 func (s *Server) Stop() {
 
+}
+
+//AddService 注册服务。。。
+func (s *Server) AddService(reg func(s *grpc.Server))  {
+    reg(s.ss)
 }

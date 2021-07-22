@@ -27,3 +27,6 @@ local-sock-server:
 local-sock-client:
 	go run -mod=vendor ./examples/sock.client/main.go
 
+local-cron:
+	go run -mod=vendor ./examples/cron/main.go
+
