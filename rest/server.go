@@ -98,6 +98,11 @@ func (e *Server) GetEngine() *gin.Engine {
     return e.engine
 }
 
+// GetRouter 获取路由引擎
+func (e *Server) GetRouter() *gin.RouterGroup {
+    return e.GetRouter()
+}
+
 // AddRouteCallback 添加路由
 func (e *Server) AddRouteCallback(routerCallback func(*gin.Engine)) {
     routerCallback(e.engine)
