@@ -1,3 +1,6 @@
+# github.com/BurntSushi/toml v0.3.1
+## explicit
+github.com/BurntSushi/toml
 # github.com/aliyun/aliyun-oss-go-sdk v2.1.8+incompatible
 ## explicit
 github.com/aliyun/aliyun-oss-go-sdk/oss
@@ -263,4 +266,5 @@ gopkg.in/alexcesaro/quotedprintable.v3
 # gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 ## explicit
 # gopkg.in/yaml.v2 v2.4.0
+## explicit
 gopkg.in/yaml.v2
