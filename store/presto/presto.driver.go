@@ -1,4 +1,4 @@
-package presto_driver
+package presto
 
 import (
     "database/sql"
