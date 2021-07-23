@@ -6,6 +6,7 @@ require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.8+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
+	github.com/blockloop/scan v1.3.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/fullstorydev/grpcui v1.1.0 // indirect
@@ -21,6 +22,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/iGoogle-ink/gopay v1.5.39
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
+	github.com/prestodb/presto-go-client v0.0.0-20201204133205-8958eb37e584
 	github.com/qiniu/api.v7/v7 v7.8.2
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/satori/go.uuid v1.2.0 // indirect
