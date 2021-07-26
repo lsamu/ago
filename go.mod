@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/BurntSushi/toml v0.3.1
+	github.com/ClickHouse/clickhouse-go v1.4.5 // indirect
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.8+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/blockloop/scan v1.3.0
