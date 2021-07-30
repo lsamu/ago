@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/lsamu/ago/tool/rpc"
 	"github.com/lsamu/ago/tool/upgrade"
 	"github.com/urfave/cli/v2"
 	"os"
@@ -18,7 +19,7 @@ func main() {
 		{
 			Name:   "rpc",
 			Usage:  "ago rpc",
-			Action: upgrade.Upgrade,
+			Action: rpc.Generate,
 		},
 		{
 			Name:   "socket",
