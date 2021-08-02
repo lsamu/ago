@@ -6,6 +6,7 @@ import (
 	"github.com/lsamu/ago/tool/k8s"
 	"github.com/lsamu/ago/tool/rest"
 	"github.com/lsamu/ago/tool/rpc"
+	"github.com/lsamu/ago/tool/so"
 	"github.com/lsamu/ago/tool/sock"
 	"github.com/lsamu/ago/tool/tcp"
 	"github.com/lsamu/ago/tool/upgrade"
@@ -35,6 +36,11 @@ func main() {
 			Name:   "tcp",
 			Usage:  "ago tcp",
 			Action: tcp.Generate,
+		},
+		{
+			Name:   "so",
+			Usage:  "ago so",
+			Action: so.Generate,
 		},
 		{
 			Name:   "docker",
