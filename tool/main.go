@@ -18,7 +18,7 @@ func main() {
 	cmd.Commands = []*cli.Command{
 		{
 			Name:   "rest",
-			Usage:  "ago rest",
+			Usage:  "ago rest create xxx, ago rest update xxx",
 			Action: rest.Generate,
 		},
 		{
