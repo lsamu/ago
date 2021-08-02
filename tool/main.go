@@ -2,7 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/lsamu/ago/tool/docker"
+	"github.com/lsamu/ago/tool/k8s"
+	"github.com/lsamu/ago/tool/rest"
 	"github.com/lsamu/ago/tool/rpc"
+	"github.com/lsamu/ago/tool/sock"
+	"github.com/lsamu/ago/tool/tcp"
 	"github.com/lsamu/ago/tool/upgrade"
 	"github.com/urfave/cli/v2"
 	"os"
@@ -14,7 +19,7 @@ func main() {
 		{
 			Name:   "rest",
 			Usage:  "ago rest",
-			Action: upgrade.Upgrade,
+			Action: rest.Generate,
 		},
 		{
 			Name:   "rpc",
@@ -24,37 +29,32 @@ func main() {
 		{
 			Name:   "socket",
 			Usage:  "ago socket",
-			Action: upgrade.Upgrade,
+			Action: sock.Generate,
 		},
 		{
 			Name:   "tcp",
 			Usage:  "ago tcp",
-			Action: upgrade.Upgrade,
+			Action: tcp.Generate,
 		},
 		{
 			Name:   "docker",
 			Usage:  "ago docker",
-			Action: upgrade.Upgrade,
+			Action: docker.Generate,
 		},
 		{
 			Name:   "k8s",
 			Usage:  "ago k8s",
-			Action: upgrade.Upgrade,
+			Action: k8s.Generate,
 		},
 		{
 			Name:   "upgrade",
 			Usage:  "ago upgrade",
-			Action: upgrade.Upgrade,
+			Action: upgrade.Generate,
 		},
 		{
 			Name:   "mysql",
 			Usage:  "ago upgrade",
-			Action: upgrade.Upgrade,
-		},
-		{
-			Name:   "migration",
-			Usage:  "ago upgrade",
-			Action: upgrade.Upgrade,
+			Action: k8s.Generate,
 		},
 	}
 	err := cmd.Run(os.Args)
