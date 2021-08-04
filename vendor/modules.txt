@@ -52,6 +52,7 @@ github.com/go-resty/resty/v2
 # github.com/gofrs/uuid v4.0.0+incompatible
 github.com/gofrs/uuid
 # github.com/golang/protobuf v1.5.2
+## explicit
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any

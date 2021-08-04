@@ -3,6 +3,7 @@ package main
 import (
     "github.com/gin-gonic/gin"
     "github.com/lsamu/ago/rest"
+    "github.com/lsamu/ago/rest/handler"
     "net/http"
 )
 
@@ -14,7 +15,6 @@ func main() {
     defer server.Stop()
 
     server.Use(func(c *gin.Context) {
-        c.String(200,"111")
         method := c.Request.Method
         c.Header("Access-Control-Allow-Origin", "*") //最好配置成域名
         c.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token")
@@ -29,9 +29,9 @@ func main() {
         c.Next()
     })
 
-    server.Use(func(c *gin.Context) {
-        c.String(200,"222")
-    })
+    //server.Use(func(c *gin.Context) {
+    //    c.String(200,"222")
+    //})
 
     server.AddRoute(rest.Route{
         Method:  "GET",
@@ -45,6 +45,23 @@ func main() {
         Path:    "/hello",
         Handler: func(c *gin.Context) {
             c.String(200,"hello ago!")
+        },
+    })
+    server.AddRoute(rest.Route{
+        Method:  "GET",
+        Path:    "/query",
+        Handler: func(c *gin.Context) {
+            type request struct {
+
+            }
+            var err error
+            req := new(request)
+            err = handler.Parse(c, req)
+            if err != nil {
+               handler.JSON(c, handler.CodeErr, err.Error())
+               return
+            }
+            handler.JSON(c, handler.CodeOK, handler.MsgOK)
         },
     })
     server.Start()

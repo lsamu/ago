@@ -86,10 +86,22 @@ func (e *Server) AddRoute(route Route) {
     e.route = e.route.Handle(route.Method, route.Path, route.Handler)
 }
 
+// AddRouteUse 添加路由
+func (e *Server) AddRouteUse(route Route, next gin.HandlerFunc) {
+    e.route = e.route.Use(next).Handle(route.Method, route.Path, route.Handler)
+}
+
 // AddRoutes 添加路由
 func (e *Server) AddRoutes(routes []Route) {
     for _, route := range routes {
         e.route = e.route.Handle(route.Method, route.Path, route.Handler)
+    }
+}
+
+// AddRoutesUse 添加路由
+func (e *Server) AddRoutesUse(routes []Route, next gin.HandlerFunc) {
+    for _, route := range routes {
+        e.route = e.route.Use(next).Handle(route.Method, route.Path, route.Handler)
     }
 }
 
