@@ -16,6 +16,7 @@ const (
 
 //Parse Parse
 func Parse(c *gin.Context, r interface{}) error {
+    log.Printf(c.ContentType())
     var err error
     if c.ContentType() == "" {
         err = c.ShouldBind(r)

@@ -1,6 +1,7 @@
 package main
 
 import (
+    "fmt"
     "github.com/gin-gonic/gin"
     "github.com/lsamu/ago/rest"
     "github.com/lsamu/ago/rest/handler"
@@ -8,7 +9,7 @@ import (
 )
 
 func main() {
-    server:=rest.NewServer(rest.RestConf{
+    server := rest.NewServer(rest.RestConf{
         Host: "0.0.0.0",
         Port: 8888,
     })
@@ -34,33 +35,34 @@ func main() {
     //})
 
     server.AddRoute(rest.Route{
-        Method:  "GET",
-        Path:    "/",
+        Method: "GET",
+        Path:   "/",
         Handler: func(c *gin.Context) {
-            c.String(200,"index ago!")
+            c.String(200, "index ago!")
         },
     })
     server.AddRoute(rest.Route{
-        Method:  "GET",
-        Path:    "/hello",
+        Method: "GET",
+        Path:   "/hello",
         Handler: func(c *gin.Context) {
-            c.String(200,"hello ago!")
+            c.String(200, "hello ago!")
         },
     })
     server.AddRoute(rest.Route{
-        Method:  "GET",
-        Path:    "/query",
+        Method: "GET",
+        Path:   "/query",
         Handler: func(c *gin.Context) {
             type request struct {
-
+                Type string `json:"type" form:"type"`
             }
             var err error
             req := new(request)
             err = handler.Parse(c, req)
             if err != nil {
-               handler.JSON(c, handler.CodeErr, err.Error())
-               return
+                handler.JSON(c, handler.CodeErr, err.Error())
+                return
             }
+            fmt.Println("%+v", req)
             handler.JSON(c, handler.CodeOK, handler.MsgOK)
         },
     })

@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/ClickHouse/clickhouse-go v1.4.5 // indirect
+	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.8+incompatible
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/blockloop/scan v1.3.0
@@ -29,7 +30,9 @@ require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/securego/gosec/v2 v2.8.1 // indirect
+	github.com/shirou/gopsutil v3.21.7+incompatible
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.27
+	github.com/tklauser/go-sysconf v0.3.7 // indirect
 	github.com/urfave/cli/v2 v2.3.0
 	go.uber.org/zap v1.18.1
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
