@@ -34,5 +34,6 @@ install:
 	go get -u golang.org/x/lint/golint
 	go get -u github.com/securego/gosec/v2/cmd/gosec
 	go get -u github.com/golang/protobuf/protoc-gen-go
+	go get -u github.com/mgechev/revive
 
 

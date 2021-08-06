@@ -53,6 +53,14 @@ type (
         MemPercent int64   `json:"mem_percent"`
         CreateTime float32 `json:"create_time"`
     }
+
+    Go struct {
+        Lang      string //语言环境
+        Path      string //安装路径
+        StartTime string //启动时间
+        Version   string //版本
+        RunTime   string //运行时长
+    }
 )
 
 func GetHostInfo() (info Host, err error) {
@@ -160,5 +168,10 @@ func GetProcessInfo(filterUserName string) (info []Process, err error) {
             CreateTime: memPer,
         })
     }
+    return
+}
+
+func GetGoInfo() (info Go, err error) {
+
     return
 }

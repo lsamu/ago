@@ -3,7 +3,7 @@ module github.com/lsamu/ago
 go 1.16
 
 require (
-	github.com/BurntSushi/toml v0.3.1
+	github.com/BurntSushi/toml v0.4.1
 	github.com/ClickHouse/clickhouse-go v1.4.5 // indirect
 	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.8+incompatible
@@ -17,13 +17,19 @@ require (
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/go-playground/validator/v10 v10.4.1
+	github.com/go-redis/redis v6.15.8+incompatible
 	github.com/go-resty/resty/v2 v2.6.0
+	github.com/go-sql-driver/mysql v1.5.0
+	github.com/go-xorm/xorm v0.7.9
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gomodule/redigo v1.8.5
 	github.com/google/uuid v1.3.0
 	github.com/googollee/go-socket.io v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/iGoogle-ink/gopay v1.5.39
+	github.com/mattn/go-isatty v0.0.13 // indirect
+	github.com/mattn/go-runewidth v0.0.13 // indirect
+	github.com/mgechev/revive v1.0.9 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/prestodb/presto-go-client v0.0.0-20201204133205-8958eb37e584
 	github.com/qiniu/api.v7/v7 v7.8.2
@@ -34,6 +40,7 @@ require (
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.27
 	github.com/tklauser/go-sysconf v0.3.7 // indirect
 	github.com/urfave/cli/v2 v2.3.0
+	github.com/weikaishio/distributed_lib v0.1.0
 	go.uber.org/zap v1.18.1
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/net v0.0.0-20210716203947-853a461950ff // indirect
