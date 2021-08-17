@@ -457,6 +457,8 @@ github.com/mitchellh/reflectwalk v1.0.0/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx
 github.com/mitchellh/reflectwalk v1.0.1/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
 github.com/mkideal/log v0.1.1-0.20170408134130-df09d4873c0a h1:cxFu8iGBGhmKMVcLZJngcFGDeGo675bxWfNdAZWTTpM=
 github.com/mkideal/log v0.1.1-0.20170408134130-df09d4873c0a/go.mod h1:UHY5EOk5+/f2z2bQ6BGspFw5gl4F1SKjZI7Bqetm724=
+github.com/mkideal/log v1.1.15 h1:R7alBrtdrcLl4tnhvYw+qQPJ3TveITyLbWBvRr9C2/Y=
+github.com/mkideal/log v1.1.15/go.mod h1:bwJLh4/erFDLJIU84rABrccbGmpnbGuchNLC5azJof4=
 github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 h1:ZqeYNhU3OHLH3mGKHDcjJRFFRrJa6eAM5H+CtDdOsPc=
 github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd h1:TRLaZ9cD/w8PVh93nsPXa1VrQ6jlwL5oN8l14QlcNfg=
@@ -1090,6 +1092,7 @@ rsc.io/sampler v1.3.0/go.mod h1:T1hPZKmBbMNahiBKFy5HrXp6adAjACjK9JXDnKaTXpA=
 sigs.k8s.io/yaml v1.1.0/go.mod h1:UJmg0vDUVViEyp3mgSv9WPwZCDxu4rQW1olrI1uml+o=
 xorm.io/builder v0.3.6 h1:ha28mQ2M+TFx96Hxo+iq6tQgnkC9IZkM6D8w9sKHHF8=
 xorm.io/builder v0.3.6/go.mod h1:LEFAPISnRzG+zxaxj2vPicRwz67BdhFreKg8yv8/TgU=
+xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb h1:msX3zG3BPl8Ti+LDzP33/9K7BzO/WqFXk610K1kYKfo=
 xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb/go.mod h1:jJfd0UAEzZ4t87nbQYtVjmqpIODugN6PD2D9E+dJvdM=
 xorm.io/core v0.7.3 h1:W8ws1PlrnkS1CZU1YWaYLMQcQilwAmQXU0BJDJon+H0=
 xorm.io/core v0.7.3/go.mod h1:jJfd0UAEzZ4t87nbQYtVjmqpIODugN6PD2D9E+dJvdM=

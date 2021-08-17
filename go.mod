@@ -30,6 +30,7 @@ require (
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mgechev/revive v1.0.9 // indirect
+	github.com/mkideal/log v1.1.15 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/prestodb/presto-go-client v0.0.0-20201204133205-8958eb37e584
 	github.com/qiniu/api.v7/v7 v7.8.2

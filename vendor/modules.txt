@@ -1,6 +1,7 @@
-# github.com/BurntSushi/toml v0.3.1
+# github.com/BurntSushi/toml v0.4.1
 ## explicit
 github.com/BurntSushi/toml
+github.com/BurntSushi/toml/internal
 # github.com/ClickHouse/clickhouse-go v1.4.5
 ## explicit
 # github.com/StackExchange/wmi v1.2.1
@@ -126,14 +127,16 @@ github.com/jcmturner/gofork/x/crypto/pbkdf2
 github.com/json-iterator/go
 # github.com/leodido/go-urn v1.2.0
 github.com/leodido/go-urn
-# github.com/mattn/go-colorable v0.1.8
-github.com/mattn/go-colorable
-# github.com/mattn/go-isatty v0.0.12
+# github.com/mattn/go-isatty v0.0.13
+## explicit
 github.com/mattn/go-isatty
-# github.com/mkideal/log v0.1.1-0.20170408134130-df09d4873c0a
+# github.com/mattn/go-runewidth v0.0.13
+## explicit
+# github.com/mgechev/revive v1.0.9
+## explicit
+# github.com/mkideal/log v1.1.15
+## explicit
 github.com/mkideal/log
-github.com/mkideal/log/logger
-github.com/mkideal/log/provider
 # github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
@@ -195,10 +198,6 @@ github.com/urfave/cli/v2
 github.com/weikaishio/distributed_lib
 github.com/weikaishio/distributed_lib/db_lazy
 github.com/weikaishio/distributed_lib/redis_pubsub
-# github.com/weikaishio/redis_orm v0.0.0-20200205124427-d4fcfd7914bd
-## explicit
-github.com/weikaishio/redis_orm
-github.com/weikaishio/redis_orm/sync2db
 # github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778
 github.com/xo/terminfo
 # go.uber.org/atomic v1.7.0
@@ -374,5 +373,5 @@ gopkg.in/jcmturner/rpc.v1/ndr
 gopkg.in/yaml.v2
 # xorm.io/builder v0.3.6
 xorm.io/builder
-# xorm.io/core v0.7.3
+# xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb
 xorm.io/core
