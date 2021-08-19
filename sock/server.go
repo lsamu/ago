@@ -3,65 +3,87 @@ package sock
 import (
     "fmt"
     "github.com/gin-gonic/gin"
-    socketio "github.com/googollee/go-socket.io"
+    "github.com/gorilla/websocket"
+    "io"
     "log"
     "net/http"
 )
 
-type Server struct {
-    conf   SockConf
-    engine *gin.Engine
-    route  gin.IRoutes
-    server *socketio.Server
+/*
+var upgrader = websocket.Upgrader{
+    ReadBufferSize:    4096,
+    WriteBufferSize:   4096,
+    EnableCompression: true,
+    CheckOrigin: func(r *http.Request) bool {
+        return true
+    },
+}*/
+
+var upgrader = websocket.Upgrader{
+    // 解决跨域问题
+    CheckOrigin: func(r *http.Request) bool {
+        return true
+    },
 }
 
-//Route Route
-type Route struct {
-    Method  string
-    Path    string
-    Handler gin.HandlerFunc
-}
-
-func NewServer(conf SockConf) *Server {
-    router := gin.New()
-    return &Server{
-        engine: router,
-        server: socketio.NewServer(nil),
+//原生
+func ws(w http.ResponseWriter, r *http.Request) {
+    conn, err := upgrader.Upgrade(w, r, nil)
+    if err != nil {
+        log.Print("upgrade:", err)
+        return
     }
-}
-
-func (s *Server) Start() {
-    go func() {
-        if err := s.server.Serve(); err != nil {
-            log.Fatalf("socketio listen error: %s\n", err)
+    defer conn.Close()
+    for {
+        mt, message, err := conn.ReadMessage()
+        if err != nil {
+            log.Println("read:", err)
+            break
         }
-    }()
-    defer s.server.Close()
-    s.engine.GET("/socket.io/*any", gin.WrapH(s.server))
-    s.engine.POST("/socket.io/*any", gin.WrapH(s.server))
-    s.engine.StaticFS("/public", http.Dir("../asset"))
-
-    bind := fmt.Sprintf("%s:%d", s.conf.Host, s.conf.Port)
-    if err := s.engine.Run(bind); err != nil {
-        log.Fatal("failed run app: ", err)
+        log.Printf("recv: %s", message)
+        err = conn.WriteMessage(mt, message)
+        if err != nil {
+            log.Println("write:", err)
+            break
+        }
     }
 }
 
-func (s *Server) Stop() {
-
+//gin
+func gins(c *gin.Context)  {
+    conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+    if err != nil {
+        log.Print("upgrade:", err)
+        return
+    }
+    defer conn.Close()
+    for {
+        mt, message, err := conn.ReadMessage()
+        if err != nil {
+            log.Println("read:", err)
+            break
+        }
+        log.Printf("recv: %s", message)
+        err = conn.WriteMessage(mt, message)
+        if err != nil {
+            log.Println("write:", err)
+            break
+        }
+    }
 }
 
-// Use 中间件
-func (e *Server) Use(next gin.HandlerFunc) {
-    e.route = e.route.Use(next)
-}
-
-// AddRoute 添加路由
-func (e *Server) AddRoute(route Route) {
-    e.route = e.route.Handle(route.Method, route.Path, route.Handler)
-}
-
-// AddEvent 添加事件
-func (e *Server) AddEvent(route Route) {
-    e.route = e.route.Handle(route.Method, route.Path, route.Handler)
+func NextRead(conn *websocket.Conn)  {
+    for {
+        mt, r, err := conn.NextReader()
+        if err != nil {
+            if err != io.EOF {
+                log.Println("NextReader:", err)
+            }
+            return
+        }
+        if mt == websocket.TextMessage {
+            //r = &validator{r: r}
+            fmt.Println(r)
+        }
+    }
 }

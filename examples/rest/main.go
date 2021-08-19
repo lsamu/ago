@@ -62,7 +62,7 @@ func main() {
                 handler.JSON(c, handler.CodeErr, err.Error())
                 return
             }
-            fmt.Println("%+v", req)
+            fmt.Printf("%+v", req)
             handler.JSON(c, handler.CodeOK, handler.MsgOK)
         },
     })
