@@ -7,10 +7,13 @@ github:
 	git config --global http.proxy 'socks5://127.0.0.1:1080'
 	git config --global https.proxy 'socks5://127.0.0.1:1080'
 
-	git push git@github.com:lsamu/ago.git main
+	git push github main
 
 	git config --global --unset http.proxy
 	git config --global --unset https.proxy
+
+github2:
+	proxy git push -f https://github.com/lsamu/ago.git main
 
 lint:
 	golint ./...
