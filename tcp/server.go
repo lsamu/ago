@@ -1,4 +1,4 @@
-package main
+package tcp
 
 import (
     "fmt"
@@ -7,6 +7,10 @@ import (
 
 type Server struct {
 
+}
+
+func NewServer() *Server{
+    return &Server{}
 }
 
 func (s *Server) Start() {
