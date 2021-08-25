@@ -21,6 +21,13 @@ func main() {
 			Name:   "rest",
 			Usage:  "ago rest create xxx, ago rest update xxx",
 			Action: rest.Generate,
+			Subcommands: []*cli.Command{
+				{
+					Name:   "new",
+					Usage:  "fast create api service",
+					Action: rest.Generate,
+				},
+			},
 		},
 		{
 			Name:   "rpc",
