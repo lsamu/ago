@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/lsamu/ago/tool/datetime"
 	"github.com/lsamu/ago/tool/docker"
 	"github.com/lsamu/ago/tool/k8s"
 	"github.com/lsamu/ago/tool/rest"
@@ -69,6 +70,7 @@ func main() {
 			Usage:  "ago upgrade",
 			Action: k8s.Generate,
 		},
+		datetime.InitCommand(),
 	}
 	err := cmd.Run(os.Args)
 	if err != nil {

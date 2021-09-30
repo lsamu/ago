@@ -28,4 +28,13 @@ install:
 	go get -u github.com/golang/protobuf/protoc-gen-go
 	go get -u github.com/mgechev/revive
 
+local-ago:
+	go run -mod=vendor ./tool/main.go datetime
+
+build-ago:
+	go build -mod=vendor -o ./tool/ago ./tool/main.go
+
+run-ago:
+	./tool/ago datetime help
+
 

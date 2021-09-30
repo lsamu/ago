@@ -8,7 +8,7 @@
 go get -u github.com/lsamu/ago
 ```
 
-## http
+## http rest
 ```
 func main() {
     server:=rest.NewServer(rest.RestConf{
@@ -22,7 +22,16 @@ func main() {
 
 ## rpc
 ```
+func main() {
+    server:= rpc.NewServer(rpc.ServerConf{
+        Host: "0.0.0.0",
+        Port: 8888,
+    }, func(server *grpc.Server) {
 
+    })
+    defer server.Stop()
+    server.Start()
+}
 ```
 
 ## socket
