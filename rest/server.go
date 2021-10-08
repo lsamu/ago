@@ -31,6 +31,14 @@ type (
 // NewServer 服务
 func NewServer(conf RestConf) *Server {
     engine := gin.Default()
+    ginMode := os.Getenv("GIN_MODE")
+    if ginMode == "" {
+        if conf.Mode == "" || conf.Mode == "debug" {
+            gin.SetMode(gin.DebugMode)
+        } else if conf.Mode == "release" {
+            gin.SetMode(gin.ReleaseMode)
+        }
+    }
     return &Server{
         conf:   conf,
         engine: engine,
@@ -111,11 +119,11 @@ func (e *Server) GetEngine() *gin.Engine {
 }
 
 // GetRouter 获取路由引擎
-func (e *Server) GetRouter() *gin.RouterGroup {
-    return e.GetRouter()
-}
+//func (e *Server) GetRouter() *gin.RouterGroup {
+//    return e.GetRouter()
+//}
 
 // AddRouteCallback 添加路由
-func (e *Server) AddRouteCallback(routerCallback func(*gin.Engine)) {
-    routerCallback(e.engine)
-}
+//func (e *Server) AddRouteCallback(routerCallback func(*gin.Engine)) {
+//    routerCallback(e.engine)
+//}
