@@ -54,12 +54,6 @@ type CustomError struct {
 
 //JSON JSON
 func JSON(c *gin.Context, code int, msg string, data ...interface{}) {
-    //c.JSON(http.StatusOK, Response{
-    //    code,
-    //    data,
-    //    msg,
-    //})
-    //c.Abort()
     result := new(Response)
     result.Code = code
     result.Msg = msg

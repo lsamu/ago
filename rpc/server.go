@@ -63,6 +63,6 @@ func (s *Server) GetServer() *grpc.Server {
 }
 
 //AddService 注册服务。。。
-func (s *Server) AddService(reg func(s *grpc.Server)) {
-    reg(s.server)
+func (s *Server) AddService(regService func(s *grpc.Server)) {
+    regService(s.server)
 }

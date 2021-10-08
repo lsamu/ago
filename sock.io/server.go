@@ -30,24 +30,24 @@ func NewServer(conf SockConf) *Server {
     }
 }
 
-func (s *Server) Start() {
+func (e *Server) Start() {
     go func() {
-        if err := s.server.Serve(); err != nil {
+        if err := e.server.Serve(); err != nil {
             log.Fatalf("socketio listen error: %s\n", err)
         }
     }()
-    defer s.server.Close()
-    s.engine.GET("/socket.io/*any", gin.WrapH(s.server))
-    s.engine.POST("/socket.io/*any", gin.WrapH(s.server))
-    s.engine.StaticFS("/public", http.Dir("../asset"))
+    defer e.server.Close()
+    e.engine.GET("/socket.io/*any", gin.WrapH(e.server))
+    e.engine.POST("/socket.io/*any", gin.WrapH(e.server))
+    e.engine.StaticFS("/public", http.Dir("../asset"))
 
-    bind := fmt.Sprintf("%s:%d", s.conf.Host, s.conf.Port)
-    if err := s.engine.Run(bind); err != nil {
+    bind := fmt.Sprintf("%s:%d", e.conf.Host, e.conf.Port)
+    if err := e.engine.Run(bind); err != nil {
         log.Fatal("failed run app: ", err)
     }
 }
 
-func (s *Server) Stop() {
+func (e *Server) Stop() {
 
 }
 

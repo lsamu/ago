@@ -36,10 +36,12 @@ func (s *Server) Stop() {
     s.cron.Stop()
 }
 
+//Use Use
 func (s *Server) Use() {
 
 }
 
+//AddFunc AddFunc
 func (s *Server) AddFunc(spec string, cmd func()) {
     addFunc, err := s.cron.AddFunc(spec, cmd)
     if err != nil {
@@ -47,4 +49,9 @@ func (s *Server) AddFunc(spec string, cmd func()) {
         return
     }
     log.Printf("task start.num:%+v", addFunc)
+}
+
+//RemoveFunc RemoveFunc
+func (s *Server) RemoveFunc(name string) {
+
 }

@@ -8,3 +8,13 @@ func Auth() gin.HandlerFunc {
 
     }
 }
+
+//AuthCheck 授权校验
+func AuthCheck()  {
+    
+}
+
+//AuthGet 获取授权信息
+func AuthGet(){
+
+}

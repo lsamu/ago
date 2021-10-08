@@ -6,6 +6,10 @@ import (
     "net/url"
 )
 
+func NewClient() {
+
+}
+
 func client()  {
     u := url.URL{Scheme: "ws", Host: "localhost:8080", Path: "/echo"}
     log.Printf("connecting to %s", u.String())
