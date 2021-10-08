@@ -22,16 +22,15 @@ func main() {
 
 ## rpc
 ```
-func main() {
-    server:= rpc.NewServer(rpc.ServerConf{
-        Host: "0.0.0.0",
-        Port: 8888,
-    }, func(server *grpc.Server) {
-
-    })
-    defer server.Stop()
-    server.Start()
-}
+server:= rpc.NewServer(rpc.ServerConf{
+    Host: "0.0.0.0",
+    Port: 8888,
+})
+server.AddService(func(s *grpc.Server) {
+    //注册服务
+})
+defer server.Stop()
+server.Start()
 ```
 
 ## socket

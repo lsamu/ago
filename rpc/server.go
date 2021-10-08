@@ -11,14 +11,14 @@ import (
 type (
     //Server Server
     Server struct {
-        conf ServerConf
-        ss   *grpc.Server
-        lis  net.Listener
+        conf   ServerConf
+        server *grpc.Server
+        listen net.Listener
     }
 )
 
 //NewServer NewServer
-func NewServer(rpcConf ServerConf, callbackService func(server *grpc.Server)) *Server {
+func NewServer(rpcConf ServerConf) *Server {
     lis, err := net.Listen("tcp", fmt.Sprintf("%d", rpcConf.Port))
     if err != nil {
         panic(err)
@@ -35,14 +35,13 @@ func NewServer(rpcConf ServerConf, callbackService func(server *grpc.Server)) *S
                 use.Auth2(),
             )))
 
-    callbackService(ss)
-    return &Server{conf: rpcConf, lis: lis}
+    return &Server{conf: rpcConf, listen: lis, server: ss}
 }
 
 //Start Start
 func (s *Server) Start() {
     //proto.RegisterMsgServer(s, &services.MsgService{})
-    err := s.ss.Serve(s.lis)
+    err := s.server.Serve(s.listen)
     if err != nil {
         panic(err)
     }
@@ -50,10 +49,20 @@ func (s *Server) Start() {
 
 //Stop Stop
 func (s *Server) Stop() {
+    s.server.Stop()
+}
+
+//Use Use
+func (s *Server) Use(handler interface{}) {
 
 }
 
+//GetServer GetServer
+func (s *Server) GetServer() *grpc.Server {
+    return s.server
+}
+
 //AddService 注册服务。。。
-func (s *Server) AddService(reg func(s *grpc.Server))  {
-    reg(s.ss)
+func (s *Server) AddService(reg func(s *grpc.Server)) {
+    reg(s.server)
 }
