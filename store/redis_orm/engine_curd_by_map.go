@@ -18,10 +18,6 @@ func (e *Engine) DeleteByPK(table *Table, pkInt int64) error {
 		if err != nil {
 			e.Printfln("DeleteByPK Index.Delete(%s,%d) err:%v", table.Name, pkInt, err)
 		}
-		//todo:support syncDB.Add, need general SQL
-		//if e.isSync2DB && table.IsSync2DB {
-		//	e.syncDB.Add(bean, db_lazy.LazyOperateType_Delete, nil, fmt.Sprintf("id=%d", pkInt))
-		//}
 	}
 	return err
 }
@@ -103,14 +99,6 @@ func (e *Engine) UpdateByMap(table *Table, columnValMap map[string]string) error
 		if err != nil {
 			e.Printfln("Update Update(%s) err:%v", table.Name, err)
 		}
-		//todo:support syncDB.Add
-		//if e.isSync2DB && table.IsSync2DB {
-		//	var colsDb []string
-		//	for _, col := range cols {
-		//		colsDb = append(colsDb, Camel2Underline(col))
-		//	}
-		//	e.syncDB.Add(bean, db_lazy.LazyOperateType_Update, colsDb, fmt.Sprintf("id=%d", pkOldId))
-		//}
 	}
 	return err
 }
@@ -168,17 +156,11 @@ func (e *Engine) InsertByMap(table *Table, columnValMap map[string]string) error
 		colValue, _ := columnValMap[colName]
 		if col.IsAutoIncrement {
 			valMap[fieldName] = ToString(lastId)
-			//if colValue.CanSet() {
-			//	colValue.SetInt(lastId)
-			//}
 		} else if col.IsCombinedIndex {
 
 		} else if col.IsCreated || col.IsUpdated {
 			createdAt := time.Now().In(e.TZLocation).Unix()
 			valMap[fieldName] = createdAt
-			//if colValue.CanSet() {
-			//	colValue.SetInt(createdAt)
-			//}
 		} else {
 			if col.EnumOptions != nil {
 				_, has := col.EnumOptions[colValue]
@@ -186,7 +168,6 @@ func (e *Engine) InsertByMap(table *Table, columnValMap map[string]string) error
 					return Err_FieldValueInvalidForEnum.Append(col.Name)
 				}
 			}
-			//SetDefaultValue(col, &colValue)
 			valMap[fieldName] = colValue
 		}
 	}
@@ -196,10 +177,6 @@ func (e *Engine) InsertByMap(table *Table, columnValMap map[string]string) error
 		if err != nil {
 			e.Printfln("Insert Update(%s,%v) err:%v", table.Name, columnValMap, err)
 		}
-		//todo:support syncDB.Add
-		//if e.isSync2DB && table.IsSync2DB {
-		//	e.syncDB.Add(bean, db_lazy.LazyOperateType_Insert, nil, "")
-		//}
 	}
 	return err
 }

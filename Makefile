@@ -13,11 +13,11 @@ local-rest:
 local-rpc-server:
 	go run -mod=vendor ./examples/rpc.server/main.go
 
-local-sock-server:
-	go run -mod=vendor ./examples/sock.server/main.go
+local-sockio-server:
+	go run -mod=vendor ./examples/sockio.server/main.go
 
-local-sock-client:
-	go run -mod=vendor ./examples/sock.client/main.go
+local-sockio-client:
+	go run -mod=vendor ./examples/sockio.client/main.go
 
 local-cron:
 	go run -mod=vendor ./examples/cron/main.go

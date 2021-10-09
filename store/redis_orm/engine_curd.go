@@ -9,7 +9,6 @@ import (
 
 /*
 only support one searchCondition to get or find
-todo: SearchCondition not a elegant way..
 */
 func (e *Engine) GetByCondition(bean interface{}, searchCon *SearchCondition) (bool, error) {
 	beanValue := reflect.ValueOf(bean)
@@ -89,18 +88,6 @@ func (e *Engine) Get(bean interface{}) (bool, error) {
 
 	pkInt := pkFieldValue.Int()
 
-	//getId, err := e.Index.GetId(table, &SearchCondition{
-	//	SearchColumn: []string{table.PrimaryKey},
-	//	//IndexType:     IndexType_IdMember,
-	//	FieldMinValue: pkInt,
-	//	FieldMaxValue: pkInt,
-	//})
-	//if err != nil {
-	//	return false, err
-	//}
-	//if getId == 0 {
-	//	return false, nil
-	//}
 	has, err := e.Index.IdIsExist(table, pkInt)
 	if err != nil {
 		return false, err
@@ -317,7 +304,7 @@ func (e *Engine) Find(offset, limit int64, searchCon *SearchCondition, beanAry i
 	if len(fields) != len(valAry) {
 		return 0, Err_FieldValueInvalid
 	}
-	//e.Printf("sliceElementType:%v", sliceElementType)
+
 	elemType := sliceElementType
 	var isPointer bool
 	if elemType.Kind() == reflect.Ptr {
@@ -328,28 +315,13 @@ func (e *Engine) Find(offset, limit int64, searchCon *SearchCondition, beanAry i
 		return 0, Err_NotSupportPointer2Pointer
 	}
 
-	//2、
-	//newElemFunc := func(fields []string) reflect.Value {
-	//	switch elemType.Kind() {
-	//	case reflect.Slice:
-	//		slice := reflect.MakeSlice(elemType, len(fields), len(fields))
-	//		x := reflect.New(slice.Type())
-	//		x.Elem().Set(slice)
-	//		return x
-	//	default:
-	//		return reflect.New(elemType)
-	//	}
-	//}
-
 	for i := 0; i < len(fields); i += len(table.ColumnsSeq) {
 		var beanValue reflect.Value
-		//1、
 		if isPointer {
 			beanValue = reflect.New(sliceElementType.Elem())
 		} else {
 			beanValue = reflect.New(sliceElementType)
 		}
-		//2、beanValue=newElemFunc(table.ColumnsSeq)
 		reflectElemVal := reflect.Indirect(beanValue)
 		for j, colName := range table.ColumnsSeq {
 			if valAry[i+j] == nil && colName == table.PrimaryKey {
@@ -500,7 +472,7 @@ func (e *Engine) InsertMulti(beans ...interface{}) (int, error) {
 	return len(affectBeans), err
 }
 
-//Done:unique index is exist? -> IsExistData
+// Insert Done:unique index is exist? -> IsExistData
 func (e *Engine) Insert(bean interface{}) error {
 	beanValue := reflect.ValueOf(bean)
 	if beanValue.Kind() != reflect.Ptr {
@@ -801,14 +773,6 @@ func (e *Engine) Incr(bean interface{}, col string, val int64) (int64, error) {
 		return 0, Err_DataNotAvailable
 	}
 
-	//pkOldId, err := e.Index.IsExistData(table, beanValue, reflectVal, table.PrimaryKey)
-	//if err != nil {
-	//	return 0, err
-	//}
-	//if pkOldId == 0 {
-	//	return 0, Err_DataNotAvailable
-	//}
-
 	res, err := e.redisClient.HIncrBy(table.GetTableKey(), GetFieldName(pkInt, col), val).Result()
 	if err == nil {
 		if e.isSync2DB && table.IsSync2DB {
@@ -1062,18 +1026,6 @@ func (e *Engine) Delete(bean interface{}) error {
 	if !has {
 		return Err_DataNotAvailable
 	}
-	//getId, err := e.Index.GetId(table, &SearchCondition{
-	//	SearchColumn: []string{table.PrimaryKey},
-	//	//IndexType:     IndexType_IdMember,
-	//	FieldMinValue: pkInt,
-	//	FieldMaxValue: pkInt,
-	//})
-	//if err != nil {
-	//	return err
-	//}
-	//if getId == 0 {
-	//	return Err_DataNotAvailable
-	//}
 
 	fields := make([]string, 0)
 	for _, colName := range table.ColumnsSeq {
@@ -1097,7 +1049,7 @@ func (e *Engine) Delete(bean interface{}) error {
 	return nil
 }
 
-//del the hashkey, it will del all elements for this hash
+// TableTruncate del the hashkey, it will del all elements for this hash
 func (e *Engine) TableTruncate(bean interface{}) error {
 	beanValue := reflect.ValueOf(bean)
 	if beanValue.Kind() != reflect.Ptr {

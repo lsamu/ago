@@ -49,7 +49,6 @@ func SchemaTablesFromTable(table *Table) *SchemaTablesTb {
 		IsSync2DB:     table.IsSync2DB,
 		Created:       table.Created,
 		Updated:       table.Updated,
-		//Version:       table.Version,
 	}
 }
 
@@ -57,8 +56,6 @@ type Table struct {
 	TableId int64
 	Name    string
 	Comment string
-	//Version int32
-	//Type          reflect.Type
 	ColumnsSeq    []string
 	ColumnsMap    map[string]*Column
 	IndexesMap    map[string]*Index
@@ -82,7 +79,6 @@ func TableFromSchemaTables(table *SchemaTablesTb) *Table {
 		IndexesMap:    make(map[string]*Index),
 		Created:       table.Created,
 		Updated:       table.Updated,
-		//Version:       table.Version,
 	}
 }
 

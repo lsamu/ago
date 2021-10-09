@@ -36,13 +36,10 @@ type Column struct {
 	IsAutoIncrement bool
 	IsCreated       bool
 	IsUpdated       bool
-	IsCombinedIndex bool //it 's only used for judge wherther need insert or delete and so on
-	//IsCascade       bool
+	IsCombinedIndex bool
 	EnumOptions map[string]int
-	//SetOptions      map[string]int
 	Comment  string
 	DataType string
-	//Type            reflect.Type //only support base type
 }
 
 func ColumnFromSchemaColumns(v *SchemaColumnsTb, schemaTable *SchemaTablesTb) *Column {
@@ -52,7 +49,6 @@ func ColumnFromSchemaColumns(v *SchemaColumnsTb, schemaTable *SchemaTablesTb) *C
 		Comment:      v.ColumnComment,
 		DefaultValue: v.DefaultValue,
 		DataType:     v.DataType,
-		//Type:reflect.Type() todo:type的支持
 	}
 	if schemaTable.PrimaryKey == v.ColumnName {
 		column.IsPrimaryKey = true

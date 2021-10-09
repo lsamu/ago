@@ -37,8 +37,6 @@ todo:concurrency safe
 解决方案：
 2、自增（HIncrBy,HIncrByFloat）的原子可靠性
 3、CAS
-
-todo:pipeline
 */
 type Engine struct {
 	redisClient *RedisClientProxy
@@ -47,7 +45,7 @@ type Engine struct {
 	isShowLog   bool
 
 	showExecTime bool
-	TZLocation   *time.Location // The timezone of the application
+	TZLocation   *time.Location
 
 	Schema *SchemaEngine
 	Index  *IndexEngine
@@ -102,7 +100,7 @@ func (e *Engine) Printfln(format string, a ...interface{}) {
 	}
 }
 
-//todo: command->redis client
+// Printf todo: command->redis client
 func (e *Engine) Printf(format string, a ...interface{}) {
 	if e.isShowLog {
 		fmt.Printf(fmt.Sprintf("[redis_orm %s] : %s", time.Now().Format("06-01-02 15:04:05"), format), a...)
@@ -239,18 +237,13 @@ func MapTableColumnFromTag(table *Table, seq int, columnName string, columnType 
 func (e *Engine) mapTable(v reflect.Value) (*Table, error) {
 	typ := v.Type()
 	table := NewEmptyTable()
-	//table.Type = typ
 	table.Name = strings.ToLower(e.TableName(v))
 	table.Comment = Camel2Underline(e.TableName(v))
-	//ptr or struct:typ.NumField()
 	for i := 0; i < typ.NumField(); i++ {
 		tag := typ.Field(i).Tag
 		rdsTagStr := tag.Get(TagIdentifier)
-
-		//var col *Column
 		fieldValue := v.Field(i)
 		fieldType := fieldValue.Type()
-
 		if rdsTagStr != "" {
 			err := MapTableColumnFromTag(table, i, typ.Field(i).Name, fieldType.Kind().String(), rdsTagStr)
 			if err != nil {
@@ -263,9 +256,9 @@ func (e *Engine) mapTable(v reflect.Value) (*Table, error) {
 			e.Printfln("MapTable field:%s, has no tag", typ.Field(i).Name)
 		}
 	}
-
 	return table, nil
 }
+
 func splitTag(tag string) (tags []string) {
 	tag = strings.TrimSpace(tag)
 	var hasQuote = false
@@ -285,6 +278,7 @@ func splitTag(tag string) (tags []string) {
 	}
 	return
 }
+
 func (e *Engine) TableName(v reflect.Value) string {
 	return strings.ToLower(v.Type().Name())
 }

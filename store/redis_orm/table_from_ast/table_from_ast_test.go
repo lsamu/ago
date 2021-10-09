@@ -14,9 +14,5 @@ func TestTableFromAst(t *testing.T) {
 	for _, table := range tableAry {
 		valTb, _ := json.Marshal(table)
 		t.Logf("%v\n", string(valTb))
-		//for _, col := range table.ColumnsMap {
-		//	val,_:=json.Marshal(col)
-		//	t.Logf("col:%v", string(val))
-		//}
 	}
 }

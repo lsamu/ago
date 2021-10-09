@@ -18,7 +18,7 @@ func NewIndexEngine(e *Engine) *IndexEngine {
 	}
 }
 
-//Done:combined index
+// GetId Done:combined index
 func (ixe *IndexEngine) GetId(table *Table, searchCon *SearchCondition) (int64, error) {
 	index, ok := table.IndexesMap[strings.ToLower(searchCon.Name())]
 	if !ok {
@@ -188,7 +188,7 @@ func (ixe *IndexEngine) IdIsExist(table *Table, pkId int64) (bool, error) {
 	return val != "", nil
 }
 
-//当前数据是否已经存在，存在则返回主键ID，唯一索引的才需要判断是否存在！
+// IsExistData 当前数据是否已经存在，存在则返回主键ID，唯一索引的才需要判断是否存在！
 func (ixe *IndexEngine) IsExistData(table *Table, beanValue, reflectVal reflect.Value, cols ...string) (int64, error) {
 	typ := reflectVal.Type()
 	_, has := typ.FieldByName(table.PrimaryKey)
@@ -371,7 +371,7 @@ func (ixe *IndexEngine) IsExistDataByMap(table *Table, valMap map[string]string)
 	return 0, nil
 }
 
-//todo: no thread safety! watch?
+// Update todo: no thread safety! watch?
 func (ixe *IndexEngine) Update(table *Table, beanValue, reflectVal reflect.Value, cols ...string) error {
 	typ := reflectVal.Type()
 	_, has := typ.FieldByName(table.PrimaryKey)
@@ -445,7 +445,6 @@ func (ixe *IndexEngine) Update(table *Table, beanValue, reflectVal reflect.Value
 				return err
 			}
 		case IndexType_IdScore:
-			//remove old index
 			_, err := ixe.engine.redisClient.ZRemRangeByScores(index.NameKey, ToString(pkFieldValue.Int()), ToString(pkFieldValue.Int())).Result()
 			if err != nil {
 				ixe.engine.Printfln("IndexUpdate ZRemRangeByScores %s:%v,err:%v", index.NameKey, ToString(pkFieldValue.Int()), err)
@@ -543,7 +542,7 @@ func (ixe *IndexEngine) UpdateByMap(table *Table, pkInt int64, valMap map[string
 	return nil
 }
 
-//todo:ReBuild single index
+// ReBuild todo:ReBuild single index
 func (ixe *IndexEngine) ReBuild(bean interface{}) error {
 	beanValue := reflect.ValueOf(bean)
 	reflectVal := reflect.Indirect(beanValue)
@@ -553,63 +552,6 @@ func (ixe *IndexEngine) ReBuild(bean interface{}) error {
 		return ERR_UnKnowTable
 	}
 	return ixe.ReBuildByTable(table)
-	//ixe.Drop(table, table.PrimaryKey)
-	//
-	//var offset int64 = 0
-	//var limit int64 = 100
-	//
-	//searchCon := NewSearchCondition(IndexType_IdMember, ScoreMin, ScoreMax, table.PrimaryKey)
-	//for {
-	//	idAry, err := ixe.Range(table, searchCon, offset, limit)
-	//	if err != nil {
-	//		return err
-	//	}
-	//	if len(idAry) == 0 {
-	//		break
-	//	} else {
-	//		offset += limit
-	//	}
-	//
-	//	fields := make([]string, 0)
-	//	for _, id := range idAry {
-	//		for _, colName := range table.ColumnsSeq {
-	//			fieldName := GetFieldName(id, colName)
-	//			fields = append(fields, fieldName)
-	//		}
-	//	}
-	//	valAry, err := ixe.engine.redisClient.HMGet(table.GetTableKey(), fields...).Result()
-	//	if err != nil {
-	//		return err
-	//	} else if valAry == nil {
-	//		break
-	//	}
-	//	if len(fields) != len(valAry) {
-	//		return Err_FieldValueInvalid
-	//	}
-	//	sliceElementType := reflect.TypeOf(bean).Elem()
-	//	for i := 0; i < len(fields); i += len(table.ColumnsSeq) {
-	//		newBeanValue := reflect.New(sliceElementType)
-	//		reflectElemVal := reflect.Indirect(newBeanValue)
-	//		for j, colName := range table.ColumnsSeq {
-	//			if valAry[i+j] == nil && colName == table.PrimaryKey {
-	//				break
-	//			}
-	//			if valAry[i+j] == nil {
-	//				continue
-	//			}
-	//			colValue := reflectElemVal.FieldByName(colName)
-	//			SetValue(valAry[i+j], &colValue)
-	//		}
-	//		err = ixe.Update(table, newBeanValue, reflect.Indirect(newBeanValue))
-	//		if err != nil {
-	//			ixe.engine.Printfln("indexReBuild Update(%v) err:%v", newBeanValue, err)
-	//		}
-	//	}
-	//	if len(idAry) < int(limit) {
-	//		break
-	//	}
-	//}
-	//return nil
 }
 
 func (ixe *IndexEngine) ReBuildByTable(table *Table) error {
@@ -678,7 +620,6 @@ func (ixe *IndexEngine) ReBuildByTable(table *Table) error {
 				} else if col.IsPrimaryKey {
 					continue
 				}
-				//fieldName := GetFieldName(pkInt, colName)
 				if valAry[i+j] != nil {
 					valMap[colName] = ToString(valAry[i+j])
 				} else {

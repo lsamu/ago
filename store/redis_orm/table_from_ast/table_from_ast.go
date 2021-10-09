@@ -36,8 +36,7 @@ func TableFromAst(fileName string, fileContent string) ([]*redis_orm.Table, erro
 				}
 				table := redis_orm.NewEmptyTable()
 				table.Name = redis_orm.Camel2Underline(spec.Name.Obj.Name)
-				//table.Version = redis_orm.TableVersionNameUnderline
-
+				
 				for seq, field := range structType.Fields.List {
 					var (
 						name = ""
@@ -60,15 +59,6 @@ func TableFromAst(fileName string, fileContent string) ([]*redis_orm.Table, erro
 							tag = tag[:len(tag)-1]
 						}
 						rdsTagStr := reflect.StructTag(tag).Get(redis_orm.TagIdentifier)
-						//todo:why do it?
-						//if len(rdsTagStr) > 0 {
-						//	tmpStrs := strings.SplitN(rdsTagStr, ",", 2)
-						//	if len(tmpStrs) > 0 {
-						//		rdsTagStr = tmpStrs[0]
-						//	}
-						//}
-						//Done:field.Type -> reflect.Kind
-						//fmt.Printf("field.Type:%T,%s\n", field.Type, redis_orm.ToString(field.Type))
 						fieldTypeStr := redis_orm.ToString(field.Type)
 						var identObj ast.Ident
 						err = json.Unmarshal([]byte(fieldTypeStr), &identObj)
@@ -76,7 +66,6 @@ func TableFromAst(fileName string, fileContent string) ([]*redis_orm.Table, erro
 							fmt.Printf("identObj unmarshal err:%v\n", err)
 							continue
 						}
-
 						redis_orm.MapTableColumnFromTag(table, seq, name, identObj.Name, rdsTagStr)
 					}
 				}

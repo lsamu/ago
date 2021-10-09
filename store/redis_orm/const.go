@@ -3,9 +3,9 @@ package redis_orm
 //Done: 多个独立的tag辩识和书写更方便些~ 需要加统一前缀，免得跟其他功能定义的tag冲突，然后又太长了，先不改
 const (
 	TagIdentifier = "redis_orm"
-	//定义是否索引，索引名自动生成 e.g.fmt.Sprintf("%s%s_%s", KeyIndexPrefix, strings.ToLower(table.Name), strings.ToLower(columnName)),
+	// TagIndex 定义是否索引，索引名自动生成 e.g.fmt.Sprintf("%s%s_%s", KeyIndexPrefix, strings.ToLower(table.Name), strings.ToLower(columnName)),
 	TagIndex = "index"
-	//唯一索引 hash和走zscore一样都是O(1) 针对IndexType_IdMember有效，IndexType_IdScore的索引本来就是唯一的~
+	// TagUniqueIndex 唯一索引 hash和走zscore一样都是O(1) 针对IndexType_IdMember有效，IndexType_IdScore的索引本来就是唯一的~
 	TagUniqueIndex = "unique"
 	/*
 			要支持一种查询条件就得增加一个索引，定义用&连接联合索引中的字段，e.g.Status&Uid
@@ -18,28 +18,28 @@ const (
 			此情况下的组合索引，仅仅支持两整型字段，左边32位 右边32位，支持范围查询的放左边
 	*/
 	TagCombinedindex = "combinedindex"
-	//默认值
+	// TagDefaultValue 默认值
 	TagDefaultValue = "dft"
-	//是否主键
+	// TagPrimaryKey 是否主键
 	TagPrimaryKey = "pk"
-	//自增~ 应用于主键
+	// TagAutoIncrement 自增~ 应用于主键
 	TagAutoIncrement = "autoincr"
-	//配置在主键的tag上，配置了该tag才能生效，同步到数据库
+	// TagSync2DB 配置在主键的tag上，配置了该tag才能生效，同步到数据库
 	TagSync2DB = "sync2db"
-	//备注名
+	// TagComment 备注名
 	TagComment = "comment"
-	//是否支持自动写创建时间
+	// TagCreatedAt 是否支持自动写创建时间
 	TagCreatedAt = "created_at"
-	//是否支持自动写更新时间
+	// TagUpdatedAt 是否支持自动写更新时间
 	TagUpdatedAt = "updated_at"
-	//枚举类型
+	// TagEnum 枚举类型
 	TagEnum = "enum"
 
-	//表key前缀+表名
+	// KeyTbPrefix 表key前缀+表名
 	KeyTbPrefix = "tb:"
-	//索引key前缀+表名+字段名
+	// KeyIndexPrefix 索引key前缀+表名+字段名
 	KeyIndexPrefix = "ix:"
-	//自增前缀+自增字段名
+	// KeyAutoIncrPrefix 自增前缀+自增字段名
 	KeyAutoIncrPrefix = "autoincr_last_"
 
 	ScoreMax = "+inf"
@@ -48,11 +48,6 @@ const (
 	NeedMapTable                  = "schematablestb,schemacolumnstb,schemaindexstb"
 	ChannelSchemaChangedSubscribe = "channel_schema_change"
 )
-
-//const (
-//	TableVersionNameLower     = 0
-//	TableVersionNameUnderline = 1
-//)
 
 const (
 	ErrorCodeSuccess    = 0

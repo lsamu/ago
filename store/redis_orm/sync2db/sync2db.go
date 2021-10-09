@@ -28,7 +28,7 @@ func NewSync2DB(mysqlOrm *xorm.Engine, lazyTimeSecond int, wait *sync.WaitGroup)
 	sync2DB.LazyMysql = db_lazy.NewLazyMysql(mysqlOrm, lazyTimeSecond)
 	go func() {
 		go sync2DB.LazyMysql.Exec()
-		ListenQuitAndDump() //expose a quit method or listen kill process signal
+		ListenQuitAndDump()
 		sync2DB.LazyMysql.Quit()
 		if sync2DB.wait!=nil {
 			sync2DB.wait.Done()
@@ -56,8 +56,4 @@ func (s *Sync2DB) Printf(format string, a ...interface{}) {
 	if s.isShowLog {
 		fmt.Printf(fmt.Sprintf("[redis_orm %s] : %s", time.Now().Format("06-01-02 15:04:05"), format), a...)
 	}
-}
-
-//首次初始化
-func (s *Sync2DB) Sync() {
 }

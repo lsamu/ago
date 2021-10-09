@@ -312,7 +312,6 @@ func (s *SchemaEngine) TableDrop(table *Table) error {
 		s.Printfln("Delete Column err:%v", err)
 	}
 	if affectedRow == 0 {
-		//return Err_DataNotAvailable
 		s.Printfln("Delete Column: column not available")
 	}
 
@@ -320,10 +319,6 @@ func (s *SchemaEngine) TableDrop(table *Table) error {
 	if err != nil {
 		return err
 	}
-
-	//TableTruncate 敏感操作，需要独立调用，等可以支持动态改表结构，无需使用TableDrop再恢复
-	//err = s.TableTruncate(bean)
-	//if err == nil {
 	s.tablesMutex.Lock()
 	delete(s.Tables, table.Name)
 	s.tablesMutex.Unlock()
