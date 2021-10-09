@@ -8,7 +8,7 @@
 go get -u github.com/lsamu/ago
 ```
 
-## http rest
+## rest
 ```
 func main() {
     server:=rest.NewServer(rest.RestConf{
@@ -35,8 +35,16 @@ func main() {
 }
 ```
 
-## socket
+## socketio
 ```
+func main() {
+    server:= sockio.NewServer(sockio.SockConf{
+        Host: "0.0.0.0",
+        Port: 8888,
+    })
+    defer server.Stop()
+    server.Start()
+}
 
 ```
 
