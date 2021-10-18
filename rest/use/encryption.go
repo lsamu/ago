@@ -9,3 +9,11 @@ func Rc4() gin.HandlerFunc {
     }
 }
 
+// Rsa Rsa
+func Rsa() gin.HandlerFunc {
+    return func(c *gin.Context){
+
+    }
+}
+
+

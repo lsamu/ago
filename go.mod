@@ -35,6 +35,7 @@ require (
 	github.com/mgechev/revive v1.0.9 // indirect
 	github.com/mkideal/log v1.1.15 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
+	github.com/opentracing/opentracing-go v1.1.0
 	github.com/prestodb/presto-go-client v0.0.0-20201204133205-8958eb37e584
 	github.com/qiniu/api.v7/v7 v7.8.2
 	github.com/robfig/cron/v3 v3.0.1
@@ -44,6 +45,7 @@ require (
 	github.com/shirou/gopsutil v3.21.7+incompatible
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.27
 	github.com/tklauser/go-sysconf v0.3.7 // indirect
+	github.com/unrolled/secure v1.0.9
 	github.com/urfave/cli/v2 v2.3.0
 	github.com/weikaishio/distributed_lib v0.1.0
 	go.mongodb.org/mongo-driver v1.7.3

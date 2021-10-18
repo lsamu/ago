@@ -187,6 +187,10 @@ github.com/mozillazg/go-httpheader
 # github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 ## explicit
 github.com/op/go-logging
+# github.com/opentracing/opentracing-go v1.1.0
+## explicit
+github.com/opentracing/opentracing-go
+github.com/opentracing/opentracing-go/log
 # github.com/pierrec/lz4 v2.6.0+incompatible
 github.com/pierrec/lz4
 github.com/pierrec/lz4/internal/xxh32
@@ -272,6 +276,9 @@ github.com/tklauser/go-sysconf
 github.com/tklauser/numcpus
 # github.com/ugorji/go/codec v1.1.7
 github.com/ugorji/go/codec
+# github.com/unrolled/secure v1.0.9
+## explicit
+github.com/unrolled/secure
 # github.com/urfave/cli/v2 v2.3.0
 ## explicit
 github.com/urfave/cli/v2
