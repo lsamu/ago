@@ -1,5 +1,10 @@
 package use
 
+import (
+    "github.com/gin-gonic/gin"
+    "net/http"
+    "time"
+)
 
 // NoCache is a middleware function that appends headers
 // to prevent the client from caching the HTTP response.
