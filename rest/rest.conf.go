@@ -1,7 +1,7 @@
 package rest
 
-//RestConf RestConf
-type RestConf struct {
+//Conf Conf
+type Conf struct {
     Host string
     Port int
     Mode string

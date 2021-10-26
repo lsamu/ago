@@ -15,7 +15,7 @@ import "github.com/gin-gonic/gin"
 type (
     //Server Server
     Server struct {
-        conf   RestConf
+        conf   Conf
         engine *gin.Engine
         server *http.Server
         route  gin.IRoutes
@@ -29,7 +29,7 @@ type (
 )
 
 // NewServer 服务
-func NewServer(conf RestConf) *Server {
+func NewServer(conf Conf) *Server {
     engine := gin.Default()
     ginMode := os.Getenv("GIN_MODE")
     if ginMode == "" {

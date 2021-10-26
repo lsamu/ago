@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-    server := rest.NewServer(rest.RestConf{
+    server := rest.NewServer(rest.Conf{
         Host: "0.0.0.0",
         Port: 8888,
     })
