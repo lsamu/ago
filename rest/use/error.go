@@ -8,14 +8,14 @@ import (
 
 // Error Error
 func Error() gin.HandlerFunc {
-    return func(c *gin.Context){
+    return func(c *gin.Context) {
         defer func() {
             if err := recover(); err != nil {
                 DebugStack := ""
-                //for _, v := range strings.Split(string(debug.Stack()), "\n") {
+                // for _, v := range strings.Split(string(debug.Stack()), "\n") {
                 //	DebugStack += v + "<br/>"
-                //}
-                //保存起来排查日志
+                // }
+                // 保存起来排查日志
                 DebugStack += fmt.Sprintf("%s", err) + "<br/>"
                 DebugStack += c.Request.Method + "  " + c.Request.Host + c.Request.RequestURI + "<br/>"
                 DebugStack += c.Request.UserAgent() + "<br/>"

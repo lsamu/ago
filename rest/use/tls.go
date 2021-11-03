@@ -6,7 +6,7 @@ import (
     "github.com/unrolled/secure"
 )
 
-//TlsHandler tls传输  domain:xxx.com     使用 router.RunTLS(":8080", "ssl.pem", "ssl.key")
+// TlsHandler tls传输  domain:xxx.com     使用 router.RunTLS(":8080", "ssl.pem", "ssl.key")
 func TlsHandler(domain string) gin.HandlerFunc {
     return func(c *gin.Context) {
         if domain == "" {

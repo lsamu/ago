@@ -10,13 +10,12 @@ import (
 )
 
 const (
-    //ApplicationJSON ApplicationJSON
+    // ApplicationJSON ApplicationJSON
     ApplicationJSON = "application/json"
 )
 
-//Parse Parse
+// Parse Parse
 func Parse(c *gin.Context, req interface{}) error {
-    //log.Printf(c.ContentType())
     var err error
     if c.ContentType() == "" {
         err = c.ShouldBind(req)
@@ -24,8 +23,8 @@ func Parse(c *gin.Context, req interface{}) error {
             log.Printf("格式化有误！%s", err.Error())
             return errors.New(fmt.Sprintf("格式化有误！%s", err.Error()))
         }
-    }else {
-        //判断是否为json
+    } else {
+        // 判断是否为json
         err = c.ShouldBindJSON(req)
         if err != nil {
             log.Printf("格式化有误！%+v", err)
@@ -48,11 +47,12 @@ func Parse(c *gin.Context, req interface{}) error {
         if len(callParam) < 1 {
             panic("param len error.")
         }
-        if _, ok := callParam[0].Interface().(error); ok {
-            panic("return type error.")
-        }
         cusErr := callParam[0].Interface()
         if cusErr != nil {
+            // 解析是否ok
+            if _, ok := cusErr.(error); !ok {
+                panic("return type error.")
+            }
             return cusErr.(error)
         }
     }
