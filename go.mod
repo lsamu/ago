@@ -3,7 +3,7 @@ module github.com/lsamu/ago
 go 1.16
 
 require (
-	github.com/BurntSushi/toml v0.4.1
+	github.com/BurntSushi/toml v0.4.1 // indirect
 	github.com/ClickHouse/clickhouse-go v1.4.5
 	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.8+incompatible
@@ -43,6 +43,7 @@ require (
 	github.com/securego/gosec/v2 v2.8.1 // indirect
 	github.com/segmentio/kafka-go v0.4.20
 	github.com/shirou/gopsutil v3.21.7+incompatible
+	github.com/spf13/viper v1.4.0
 	github.com/tencentyun/cos-go-sdk-v5 v0.7.27
 	github.com/tklauser/go-sysconf v0.3.7 // indirect
 	github.com/unrolled/secure v1.0.9
@@ -58,5 +59,5 @@ require (
 	google.golang.org/grpc v1.39.0
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df // indirect
-	gopkg.in/yaml.v2 v2.4.0
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

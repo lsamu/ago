@@ -1,34 +1,43 @@
 package conf
 
 import (
-    "encoding/json"
-    "github.com/BurntSushi/toml"
-    "gopkg.in/yaml.v2"
-    "io/ioutil"
-    "os"
+    "github.com/spf13/viper"
+    "path"
+    "path/filepath"
     "strings"
 )
 
-// Load 加载文件
-func Load(path string, v interface{}) error {
-    root := os.Getenv("SERVER_ROOT")
-    if "" == root {
-        root = "."
-    }
-    confpath := root + "/" + path
-    content, err := ioutil.ReadFile(confpath)
-    if nil != err {
-        panic("Can not found conf file")
-    }
+type Conf struct {
+    FilePath string //  ./xxx/xxx.toml
+}
 
-    if strings.HasSuffix(confpath, ".json") {
-        err = json.Unmarshal(content, v)
+// InitConfig InitConfig
+func InitConfig(conf *Conf)(err error) {
+    if conf.FilePath == "" {
+        panic("filePath is empty")
     }
-    if strings.HasSuffix(confpath, ".yml") {
-        err = yaml.Unmarshal(content, v)
+    dir, file := filepath.Split(conf.FilePath)
+    // fileName := filepath.Base(conf.FilePath)
+    fileExt := path.Ext(conf.FilePath)
+    viper.SetConfigFile(file)
+    viper.SetConfigType(strings.Trim(fileExt, "."))
+    viper.AddConfigPath(dir)
+
+    err = viper.ReadInConfig()     // 查找并读取配置文件
+    if err != nil {                // 处理读取配置文件的错误
+        return
     }
-    if strings.HasSuffix(confpath, ".toml") {
-        err = toml.Unmarshal(content, v)
-    }
+    return
+}
+
+// GetConfig GetConfig
+func GetConfig(confFile interface{}) (err error) {
+    err = viper.Unmarshal(confFile)
+    return err
+}
+
+// GetConfigByKey GetConfigByKey
+func GetConfigByKey(key string, confFile interface{}) (err error) {
+    err = viper.UnmarshalKey(key, confFile)
     return err
 }
