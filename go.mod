@@ -12,6 +12,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/fullstorydev/grpcui v1.1.0 // indirect
+	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-gomail/gomail v0.0.0-20160411212932-81ebce5c23df
 	github.com/go-playground/locales v0.13.0
@@ -49,6 +50,7 @@ require (
 	github.com/unrolled/secure v1.0.9
 	github.com/urfave/cli/v2 v2.3.0
 	github.com/weikaishio/distributed_lib v0.1.0
+	github.com/weikaishio/redis_orm v0.0.0-20200205124427-d4fcfd7914bd
 	go.mongodb.org/mongo-driver v1.7.3
 	go.uber.org/zap v1.18.1
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect

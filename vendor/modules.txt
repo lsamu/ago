@@ -42,6 +42,9 @@ github.com/eclipse/paho.mqtt.golang/packets
 github.com/fsnotify/fsnotify
 # github.com/fullstorydev/grpcui v1.1.0
 ## explicit
+# github.com/gin-contrib/cors v1.3.1
+## explicit
+github.com/gin-contrib/cors
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
 # github.com/gin-gonic/gin v1.7.2
@@ -316,6 +319,11 @@ github.com/urfave/cli/v2
 github.com/weikaishio/distributed_lib
 github.com/weikaishio/distributed_lib/db_lazy
 github.com/weikaishio/distributed_lib/redis_pubsub
+# github.com/weikaishio/redis_orm v0.0.0-20200205124427-d4fcfd7914bd
+## explicit
+github.com/weikaishio/redis_orm
+github.com/weikaishio/redis_orm/example/models
+github.com/weikaishio/redis_orm/sync2db
 # github.com/xdg-go/pbkdf2 v1.0.0
 github.com/xdg-go/pbkdf2
 # github.com/xdg-go/scram v1.0.2
@@ -537,5 +545,5 @@ gopkg.in/jcmturner/rpc.v1/ndr
 gopkg.in/yaml.v2
 # xorm.io/builder v0.3.6
 xorm.io/builder
-# xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb
+# xorm.io/core v0.7.3
 xorm.io/core
