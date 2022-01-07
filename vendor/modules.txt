@@ -193,9 +193,6 @@ github.com/mattn/go-isatty
 ## explicit
 # github.com/mitchellh/mapstructure v1.1.2
 github.com/mitchellh/mapstructure
-# github.com/mkideal/log v1.1.15
-## explicit
-github.com/mkideal/log
 # github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
@@ -316,14 +313,8 @@ github.com/unrolled/secure
 github.com/urfave/cli/v2
 # github.com/weikaishio/distributed_lib v0.1.0
 ## explicit
-github.com/weikaishio/distributed_lib
-github.com/weikaishio/distributed_lib/db_lazy
-github.com/weikaishio/distributed_lib/redis_pubsub
 # github.com/weikaishio/redis_orm v0.0.0-20200205124427-d4fcfd7914bd
 ## explicit
-github.com/weikaishio/redis_orm
-github.com/weikaishio/redis_orm/example/models
-github.com/weikaishio/redis_orm/sync2db
 # github.com/xdg-go/pbkdf2 v1.0.0
 github.com/xdg-go/pbkdf2
 # github.com/xdg-go/scram v1.0.2

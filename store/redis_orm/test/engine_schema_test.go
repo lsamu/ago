@@ -2,8 +2,8 @@ package test
 
 import (
 	"fmt"
-	"github.com/weikaishio/redis_orm"
-	"github.com/weikaishio/redis_orm/example/models"
+	"github.com/lsamu/ago/store/redis_orm"
+	"github.com/lsamu/ago/store/redis_orm/example/models"
 	"reflect"
 	"strings"
 	"testing"

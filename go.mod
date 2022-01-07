@@ -34,7 +34,6 @@ require (
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mgechev/revive v1.0.9 // indirect
-	github.com/mkideal/log v1.1.15 // indirect
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/opentracing/opentracing-go v1.1.0
 	github.com/prestodb/presto-go-client v0.0.0-20201204133205-8958eb37e584
@@ -49,8 +48,8 @@ require (
 	github.com/tklauser/go-sysconf v0.3.7 // indirect
 	github.com/unrolled/secure v1.0.9
 	github.com/urfave/cli/v2 v2.3.0
-	github.com/weikaishio/distributed_lib v0.1.0
-	github.com/weikaishio/redis_orm v0.0.0-20200205124427-d4fcfd7914bd
+	github.com/weikaishio/distributed_lib v0.1.0 // indirect
+	github.com/weikaishio/redis_orm v0.0.0-20200205124427-d4fcfd7914bd // indirect
 	go.mongodb.org/mongo-driver v1.7.3
 	go.uber.org/zap v1.18.1
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect

@@ -3,13 +3,12 @@ package redis_pubsub
 import (
 	"errors"
 	"fmt"
+	"github.com/go-redis/redis"
+	"log"
 	"runtime"
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"github.com/go-redis/redis"
-	"github.com/mkideal/log"
 )
 
 type RdsPubSubMsg struct {
@@ -57,9 +56,9 @@ func (r *RdsPubSubMsg) Publish(channel string, msg interface{}) error {
 }
 
 func (r *RdsPubSubMsg) Quit() {
-	log.Info("RdsPubSub ready quit")
+	log.Println("RdsPubSub ready quit")
 	atomic.SwapInt32(&r.running, 0)
-	log.Info("RdsPubSubquit ok")
+	log.Println("RdsPubSubquit ok")
 }
 func (r *RdsPubSubMsg) IsRunning() bool {
 	return atomic.LoadInt32(&r.running) != 0
@@ -72,7 +71,7 @@ func (r *RdsPubSubMsg) StartSubscription() {
 		return
 	}
 
-	log.Info("StartSubscription")
+	log.Println("StartSubscription")
 	defer atomic.CompareAndSwapInt32(&r.running, 1, 0)
 
 	sleepSecond := 3
@@ -80,7 +79,7 @@ func (r *RdsPubSubMsg) StartSubscription() {
 		select {
 		case <-time.After(1 * time.Second):
 			if r.redisClient == nil {
-				log.Warn("StartSubscription rdsPubSubClient.redisClient is nil")
+				log.Println("StartSubscription rdsPubSubClient.redisClient is nil")
 				break
 			}
 			for r.IsRunning() {
@@ -103,7 +102,7 @@ func (r *RdsPubSubMsg) StartSubscription() {
 				isOpen, _ := r.subscription(subCli, sleepSecond, channels)
 
 				if !isOpen {
-					log.Error("StartSubscription sub.Channel() isClose, u.renewSubClient")
+					log.Println("StartSubscription sub.Channel() isClose, u.renewSubClient")
 					time.Sleep(time.Duration(sleepSecond) * time.Second)
 					sleepSecond += sleepSecond
 				}else{
@@ -112,7 +111,7 @@ func (r *RdsPubSubMsg) StartSubscription() {
 			}
 		}
 	}
-	log.Info("quit StartSubscription")
+	log.Println("quit StartSubscription")
 }
 func (r *RdsPubSubMsg) subscription(subCli *redis.PubSub, sleepSecond int, channels []string) (isOpen bool, err error) {
 	defer func() {
@@ -127,7 +126,7 @@ func (r *RdsPubSubMsg) subscription(subCli *redis.PubSub, sleepSecond int, chann
 			default:
 				err = fmt.Errorf("%v", typ)
 			}
-			log.Error("==== STACK TRACE BEGIN ====\npanic: %v\n%s\n===== STACK TRACE END =====", err, string(buf))
+			log.Printf("==== STACK TRACE BEGIN ====\npanic: %v\n%s\n===== STACK TRACE END =====", err, string(buf))
 		}
 	}()
 	for {
@@ -140,16 +139,16 @@ func (r *RdsPubSubMsg) subscription(subCli *redis.PubSub, sleepSecond int, chann
 				if has {
 					onRevMsg(msg)
 				} else {
-					log.Warn("r.newMsgRev[%s] !has", msg.Channel)
+					log.Printf("r.newMsgRev[%s] !has", msg.Channel)
 				}
 			} else {
 				return false, nil
 			}
 		case <-r.newChannel:
-			log.Info("StartSubscription new channel rev")
+			log.Println("StartSubscription new channel rev")
 			return true, nil
 		case <-time.After(30 * time.Minute):
-			log.Info("StartSubscription <-sub.Channel() timeout for 30 min")
+			log.Println("StartSubscription <-sub.Channel() timeout for 30 min")
 			return true, nil
 		}
 	}

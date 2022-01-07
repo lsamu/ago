@@ -2,7 +2,7 @@ package redis_orm
 
 import (
 	"fmt"
-	"github.com/weikaishio/distributed_lib/redis_pubsub"
+	"github.com/lsamu/ago/store/redis_orm/uitils/redis_pubsub"
 	"math"
 	"reflect"
 	"strings"

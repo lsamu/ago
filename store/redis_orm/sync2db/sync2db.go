@@ -4,7 +4,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
-	"github.com/weikaishio/distributed_lib/db_lazy"
+	"github.com/lsamu/ago/store/redis_orm/uitils/db_lazy"
 	"reflect"
 	"sync"
 	"time"

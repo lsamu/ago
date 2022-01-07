@@ -18,7 +18,7 @@ var (
 func init() {
 	options := redis.Options{
 		Addr:     "127.0.0.1:6379",
-		Password: "",
+		Password: "root123",
 		DB:       1,
 	}
 

@@ -2,7 +2,7 @@ package redis_orm
 
 import (
 	"fmt"
-	"github.com/weikaishio/distributed_lib/db_lazy"
+	"github.com/lsamu/ago/store/redis_orm/uitils/db_lazy"
 	"reflect"
 	"time"
 )

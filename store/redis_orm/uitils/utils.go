@@ -1,11 +1,10 @@
 package distributed_lib
 
 import (
-	"fmt"
-	"runtime"
 	"errors"
-
-	"github.com/mkideal/log"
+	"fmt"
+	"log"
+	"runtime"
 )
 
 func Try(fn func()) (err error) {
@@ -21,7 +20,7 @@ func Try(fn func()) (err error) {
 			default:
 				err = fmt.Errorf("%v", typ)
 			}
-			log.Error("==== STACK TRACE BEGIN ====\npanic: %v\n%s\n===== STACK TRACE END =====", err, string(buf))
+			log.Printf("==== STACK TRACE BEGIN ====\npanic: %v\n%s\n===== STACK TRACE END =====", err, string(buf))
 		}
 	}()
 	fn()

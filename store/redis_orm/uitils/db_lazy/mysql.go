@@ -4,15 +4,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/go-xorm/xorm"
+	"github.com/lsamu/ago/store/redis_orm/uitils"
+	"log"
 	"sort"
 	"sync"
 	"sync/atomic"
 	"time"
-
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/go-xorm/xorm"
-	"github.com/mkideal/log"
-	"github.com/weikaishio/distributed_lib"
 )
 
 type LazyOperateType int
@@ -81,22 +80,22 @@ Done:锁粒度降低
 todo:未做每次flush的执行数量限制, 暂不用
 */
 func (a *LazyMysql) Quit() {
-	log.Warn("LazyMysql's Quit begin")
+	log.Println("LazyMysql's Quit begin")
 	atomic.StoreInt32(&a.isRunning, 0)
 	a.quit <- struct{}{}
 	err := a.Flush() //再次确认处理完毕
 	if err != nil {
-		log.Error("LazyMysql's Exec Flush err:%v", err)
+		log.Printf("LazyMysql's Exec Flush err:%v", err)
 	}
-	log.Warn("LazyMysql's Quit end")
+	log.Println("LazyMysql's Quit end")
 }
 func (a *LazyMysql) IsRunning() bool {
 	return atomic.LoadInt32(&a.isRunning) == 1
 }
 func (a *LazyMysql) Exec() {
-	log.Warn("LazyMysql's Exec begin")
+	log.Println("LazyMysql's Exec begin")
 	if !atomic.CompareAndSwapInt32(&a.isRunning, 0, 1) {
-		log.Error("LazyMysql's Exec is already running, stop the Exec")
+		log.Println("LazyMysql's Exec is already running, stop the Exec")
 		return
 	}
 	defer atomic.CompareAndSwapInt32(&a.isRunning, 1, 0)
@@ -104,16 +103,16 @@ func (a *LazyMysql) Exec() {
 		err := distributed_lib.Try(func() {
 			err := a.Flush()
 			if err != nil {
-				log.Error("LazyMysql's Exec Flush err:%v", err)
+				log.Printf("LazyMysql's Exec Flush err:%v", err)
 			}
 		})
 		if err != nil {
-			log.Error("LazyMysql's Exec Flush unhandled err:%v", err)
+			log.Println("LazyMysql's Exec Flush unhandled err:%v", err)
 		}
 		select {
 		case <-time.After(a.lazyDuration):
 		case <-a.quit:
-			log.Warn("LazyMysql's Exec end")
+			log.Println("LazyMysql's Exec end")
 			break
 		}
 	}
@@ -126,10 +125,10 @@ func (a *LazyMysql) Flush() error {
 		return nil
 	}
 
-	log.Trace("LazyMysql's Flush begin")
-	defer log.Trace("LazyMysql's Flush end")
+	log.Println("LazyMysql's Flush begin")
+	defer log.Println("LazyMysql's Flush end")
 
-	log.Trace("LazyMysql's Flush need handle count:%d", len(a.waitHandle))
+	log.Printf("LazyMysql's Flush need handle count:%d", len(a.waitHandle))
 	keys := make([]int32, 0)
 
 	var operates operatesSupportSort
@@ -147,12 +146,12 @@ func (a *LazyMysql) Flush() error {
 		return fmt.Errorf("lazy_mysql's Flush session.Begin err:%v", err)
 	}
 	for _, v := range operates {
-		log.Trace("LazyMysql's Flush handle seq:%d", v.seq)
+		log.Printf("LazyMysql's Flush handle seq:%d", v.seq)
 		switch v.operateType {
 		case LazyOperateType_Insert:
 			_, err = session.InsertOne(v.tb)
 			if err != nil {
-				log.Error("lazy_mysql's Flush Insert data:%v,condition:%v,err:%v", v.tb, v.condition, err)
+				log.Printf("lazy_mysql's Flush Insert data:%v,condition:%v,err:%v", v.tb, v.condition, err)
 				continue //session no need rollback
 			}
 		case LazyOperateType_Update:
@@ -165,7 +164,7 @@ func (a *LazyMysql) Flush() error {
 			}
 			_, err = session.Update(v.tb)
 			if err != nil {
-				log.Error("lazy_mysql's Flush Update data:%v,condition:%v,v.cols:%v,err:%v", v.tb, v.condition, v.cols, err)
+				log.Printf("lazy_mysql's Flush Update data:%v,condition:%v,v.cols:%v,err:%v", v.tb, v.condition, v.cols, err)
 				continue
 			}
 		case LazyOperateType_Delete:
@@ -176,25 +175,25 @@ func (a *LazyMysql) Flush() error {
 				}
 				_, err = session.Delete(v.tb)
 				if err != nil {
-					log.Error("lazy_mysql's Flush Delete data:%v,condition:%v,v.cols:%v,err:%v", v.tb, v.condition, v.cols, err)
+					log.Printf("lazy_mysql's Flush Delete data:%v,condition:%v,v.cols:%v,err:%v", v.tb, v.condition, v.cols, err)
 					continue
 				}
 			} else {
-				log.Error("lazy_mysql's Flush Delete data:%v,condition:%v is nil not support", v.tb, v.condition, v.cols, err)
+				log.Printf("lazy_mysql's Flush Delete data:%v,condition:%v is nil not support", v.tb, v.condition, v.cols, err)
 			}
 		case LazyOperateType_SQL:
 			if v.sql != "" {
 				_, err := session.Exec(v.sql)
 				if err != nil {
-					log.Error("lazy_mysql's Flush Exec sql:%v,err:%v", v.sql, err)
+					log.Printf("lazy_mysql's Flush Exec sql:%v,err:%v", v.sql, err)
 					continue
 				}
 			} else {
-				log.Error("lazy_mysql's Flush Exec sql:%v is nil not support", v.sql, err)
+				log.Printf("lazy_mysql's Flush Exec sql:%v is nil not support", v.sql, err)
 			}
 		default:
 			tbBys, _ := json.Marshal(v.tb)
-			log.Error("LazyMysql's Flush %v:%d,data:%v,condition:%v", ERR_NotImpletementOperateType, v.operateType, string(tbBys), v.condition)
+			log.Printf("LazyMysql's Flush %v:%d,data:%v,condition:%v", ERR_NotImpletementOperateType, v.operateType, string(tbBys), v.condition)
 		}
 		keys = append(keys, v.seq)
 	}
@@ -221,7 +220,7 @@ func (a *LazyMysql) AddSQL(sql string, params ...interface{}) error {
 }
 func (a *LazyMysql) AddWithLimit(tb interface{}, sql string, operateType LazyOperateType, cols []string, condition string, limit int) error {
 	if atomic.LoadInt32(&a.isRunning) != 1 {
-		log.Error("LazyMysql's Add exec failed, for it's already stoped (%v,%v,%v,%v,%v)", tb, sql, operateType, condition, cols)
+		log.Printf("LazyMysql's Add exec failed, for it's already stoped (%v,%v,%v,%v,%v)", tb, sql, operateType, condition, cols)
 		return ERR_AlreadyStop
 	}
 	atomic.AddInt32(&a.seq, 1)
@@ -238,6 +237,6 @@ func (a *LazyMysql) AddWithLimit(tb interface{}, sql string, operateType LazyOpe
 	a.waitHandle[operateObj.seq] = operateObj
 	a.lock.Unlock()
 
-	log.Trace("LazyMysql's Add exec seq:%d", operateObj.seq)
+	log.Printf("LazyMysql's Add exec seq:%d", operateObj.seq)
 	return nil
 }
