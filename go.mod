@@ -30,6 +30,7 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/iGoogle-ink/gopay v1.5.39
+	github.com/jinzhu/gorm v1.9.16
 	github.com/jjonline/go-lib-backend/guzzle v0.0.0-20210816040345-5d49dc4f8228
 	github.com/mattn/go-isatty v0.0.13 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect

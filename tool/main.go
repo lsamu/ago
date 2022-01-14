@@ -5,6 +5,7 @@ import (
 	"github.com/lsamu/ago/tool/datetime"
 	"github.com/lsamu/ago/tool/docker"
 	"github.com/lsamu/ago/tool/k8s"
+	"github.com/lsamu/ago/tool/mysql"
 	"github.com/lsamu/ago/tool/rest"
 	"github.com/lsamu/ago/tool/rpc"
 	"github.com/lsamu/ago/tool/so"
@@ -68,7 +69,7 @@ func main() {
 		{
 			Name:   "mysql",
 			Usage:  "ago upgrade",
-			Action: k8s.Generate,
+			Action: mysql.Generate,
 		},
 		datetime.InitCommand(),
 	}

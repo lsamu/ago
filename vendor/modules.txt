@@ -168,6 +168,11 @@ github.com/iGoogle-ink/gopay/wechat/v3
 # github.com/jcmturner/gofork v1.0.0
 github.com/jcmturner/gofork/encoding/asn1
 github.com/jcmturner/gofork/x/crypto/pbkdf2
+# github.com/jinzhu/gorm v1.9.16
+## explicit
+github.com/jinzhu/gorm
+# github.com/jinzhu/inflection v1.0.0
+github.com/jinzhu/inflection
 # github.com/jjonline/go-lib-backend/guzzle v0.0.0-20210816040345-5d49dc4f8228
 ## explicit
 github.com/jjonline/go-lib-backend/guzzle
