@@ -43,13 +43,13 @@ func (s *Schema) GetTables(dbName string) (tables []TableSchema, err error) {
 }
 
 // GetColumns 获取所有列
-func (s Schema) GetColumns(dbName string, tableName string) (columns []ColumnSchema, err error) {
+func (s *Schema) GetColumns(dbName string, tableName string) (columns []ColumnSchema, err error) {
     err = DB.Raw("SELECT COLUMN_NAME column_name,DATA_TYPE data_type,COLUMN_KEY column_key,EXTRA extra,CASE DATA_TYPE WHEN 'longtext' THEN c.CHARACTER_MAXIMUM_LENGTH WHEN 'varchar' THEN c.CHARACTER_MAXIMUM_LENGTH WHEN 'double' THEN CONCAT_WS( ',', c.NUMERIC_PRECISION, c.NUMERIC_SCALE ) WHEN 'decimal' THEN CONCAT_WS( ',', c.NUMERIC_PRECISION, c.NUMERIC_SCALE ) WHEN 'int' THEN c.NUMERIC_PRECISION WHEN 'bigint' THEN c.NUMERIC_PRECISION ELSE '' END AS data_type_long,COLUMN_COMMENT column_comment FROM INFORMATION_SCHEMA.COLUMNS c WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?", tableName, dbName).Scan(&columns).Error
     return columns, err
 }
 
 // Generate Generate
-func (s Schema) Generate(dbName, tableName string) (err error) {
+func (s *Schema) Generate(dbName, tableName string) (err error) {
     var tableNames []TableSchema
     if tableName == "" { // 获取所有表
         tableNames, err = s.GetTables(dbName)
@@ -64,14 +64,27 @@ func (s Schema) Generate(dbName, tableName string) (err error) {
     // 遍历所有表，获取表结构
     for _, value := range tableNames {
         fmt.Println(value)
+        // 组装数据
+        err, columns := s.GetColumns(dbName, value.TableName)
+        if err != nil {
+            continue
+        }
+        fmt.Println(columns)
     }
     return
 }
 
+// createTemp  createTemp
+func (s *Schema) createTemp(tplFileList []string, templateStruct TemplateStruct) {
+
+}
+
+// TableSchema TableSchema
 type TableSchema struct {
     TableName string `json:"tableName"`
 }
 
+// ColumnSchema ColumnSchema
 type ColumnSchema struct {
     ColumnName    string `json:"columnName" gorm:"column:column_name"`
     DataType      string `json:"dataType" gorm:"column:data_type"`
@@ -79,4 +92,12 @@ type ColumnSchema struct {
     EXTRA         string `json:"extra" gorm:"column:extra"`
     DataTypeLong  string `json:"dataTypeLong" gorm:"column:data_type_long"`
     ColumnComment string `json:"columnComment" gorm:"column:column_comment"`
+}
+
+// TemplateStruct TemplateStruct
+type TemplateStruct struct {
+    ModelName  string         `json:"structName"` // SysApis
+    TableName  string         `json:"tableName"`  // sys_apis
+    RouterName string         `json:"routerName"` // sysApis
+    Fields     []ColumnSchema `json:"fields"`
 }
