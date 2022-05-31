@@ -20,13 +20,17 @@ func main() {
         Method: "GET",
         Path:   "/",
         Handler: func(c *gin.Context) {
+            req := &request.UserRequest{}
+            handler.Parse(c, &req)
             c.String(200, "index ago!")
         },
     })
     server.AddRoute(rest.Route{
-        Method: "GET",
+        Method: "POST",
         Path:   "/hello",
         Handler: func(c *gin.Context) {
+            req := &request.UserRequest{}
+            handler.Parse(c, &req)
             c.String(200, "hello ago!")
         },
     })
