@@ -2,7 +2,7 @@ git:
 	./_git.sh
 
 github:
-	proxychains4 git push -f https://github.com/lsamu/ago.git main
+	git push -f https://github.com/lsamu/ago.git main
 
 lint:
 	golint ./...
